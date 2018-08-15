@@ -5,7 +5,7 @@
     Written by Adam "WaveParadigm" Gincel for the Icons: Combat Arena Discord Server.	
 */
 const fs = require("fs");
-const request = require("async-request");
+const request = null;
 const uuid = require("uuid/v4");
 
 const ids = JSON.parse(fs.readFileSync("./info/ids.json", "utf8"));
@@ -211,7 +211,8 @@ async function manageVoiceChannels(guild) {
 }
 
 async function scrapeNews(message, justCheck) {
-	let req = await request("https://icons.gg/news");
+	//let req = await request("https://icons.gg/news");
+	let req = {body: "http://icons.gg/news/"};
 	//after trying the hard way to do DOM traversal
 	//we're going to do the lazy approach and just traverse the raw string for the first instance of "https://icons.gg/news/", get that full URL, and then print it if relevant
 	let firstNewsIndex = req.body.indexOf("http://icons.gg/news/"); //temp after site revamp

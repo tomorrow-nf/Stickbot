@@ -9,7 +9,6 @@
   "author": "Adam Gincel",
   "license": "ISC",
   "dependencies": {
-    "async-request": "^1.2.0",
     "discord.js": "^11.3.2",
     "fs": "0.0.1-security"
   }

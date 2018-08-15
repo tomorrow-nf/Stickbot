@@ -8,6 +8,7 @@ Gifkin is a Discord Bot powered by [discord.js](https://discord.js.org/). The Bo
 
 ## Features
 Gifkin can do many things, and is getting neat upgrades all the time! A small sampling of what he can do:
+
 	* Server info (Can tell you how many members have joined the server, and how many are online)
 	* Message analytics (Can tell you who are the most frequent posters in a given channel)
 	* Dynamic Text Commands (Any mod can create a command that will return text that is available to all users)
