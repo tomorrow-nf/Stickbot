@@ -1,0 +1,16 @@
+For proper operation of this bot, this /info/ folder needs the following files. They will be created and populated with dummy information in some cases by ./src/config.js.
+These are not included in the repo as they are obviously sensitive information.
+
+blacklist.json
+blacklistIgnore.json
+blacklistWarningSpecialCases.json
+censorshipInfo.json
+cotw.json
+discordToken.txt
+ids.json
+recent-news.txt
+roleEmoji.json
+todo.json
+userCommands.json
+voicechannels.json
+

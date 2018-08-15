@@ -1,0 +1,6 @@
+*.txt
+/info/*.json
+/info/*.csv
+/info/*.txt
+/node_modules/
+*.sh
