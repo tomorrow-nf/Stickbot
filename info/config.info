@@ -5,7 +5,6 @@ blacklist.json
 blacklistIgnore.json
 blacklistWarningSpecialCases.json
 censorshipInfo.json
-cotw.json
 discordToken.txt
 ids.json
 recent-news.txt
