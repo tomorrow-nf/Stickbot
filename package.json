@@ -1,7 +1,7 @@
 {
-  "name": "iconsbot",
+  "name": "cgccbot",
   "version": "1.0.0",
-  "description": "A custom bot for the Icons Combat Arena Discord Server.",
+  "description": "A custom bot for the CustomGCC Discord Server.",
   "main": "index.js",
   "scripts": {
     "test": "node index.js"
