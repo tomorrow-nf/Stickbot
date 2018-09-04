@@ -3,6 +3,7 @@
     Handles all things related to reactions and emoji.
 
     Written by Adam "WaveParadigm" Gincel for the Icons: Combat Arena Discord Server.	
+    Modified by Tyler "NFreak" Morrow for the CGCC Discord Server.
 */
 
 const fs = require("fs");
@@ -31,7 +32,7 @@ async function handleReactionAdd(messageReaction, user, DiscordBot) {
 	if (messageReaction.message.channel.name == "role-assignment") { 
 		console.log(messageReaction.emoji.name);
 		if (messageReaction.emoji.name == "zhuW") {
-			//add character emotes
+			//add role emotes
 			removeReacts = false;
 			let emojiNames = JSON.parse(fs.readFileSync("./info/roleEmoji.json", "utf8"));
 			for (let i = 0; i < emojiNames.length; i++) {
