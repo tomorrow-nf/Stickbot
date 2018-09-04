@@ -10,17 +10,17 @@ const misc = require("./misc.js");
 
 let removeReacts = true;
 const emojiRoleDict = {
-	"EastCoast": "East Coast",
-	"WestCoast": "West Coast",
-	"SouthAmerica": "South America",
-	"AfiGalu": "Afi & Galu"
+	"cgccPurple": "Button Creator",
+	"cgccGreen": "Controller Painter",
+	"cgccOrange": "Functional Modder",
+	"cgccBlue": "Electrical Modder",
+	"cgccLime": "Graphic Designer",
+	"cgccYellow": "Cable Modder"
 }
 
 function emojiToRole(emojiName, messageID) {
-	let ret = emojiName;
-	if (emojiRoleDict[emojiName])
-		ret = emojiRoleDict[emojiName];
-
+	let ret = emojiRoleDict[emojiName];
+	
 	if (messageID == misc.ids.secondary) {
 		ret += " (Secondary)";
 	}
@@ -28,27 +28,17 @@ function emojiToRole(emojiName, messageID) {
 }
 
 async function handleReactionAdd(messageReaction, user, DiscordBot) {
-	if (messageReaction.message.channel.name == "set-your-roles") { //if we're in the set-your-roles channel
+	if (messageReaction.message.channel.name == "role-assignment") { 
 		console.log(messageReaction.emoji.name);
-		if (messageReaction.emoji.name == "wavedash") {
+		if (messageReaction.emoji.name == "zhuW") {
 			//add character emotes
 			removeReacts = false;
-			let emojiNames = JSON.parse(fs.readFileSync("./info/roleEmoji.json", "utf8")); //["Ashani", "Kidd", "Xana", "Raymer", "Zhurong", "AfiGalu"];
+			let emojiNames = JSON.parse(fs.readFileSync("./info/roleEmoji.json", "utf8"));
 			for (let i = 0; i < emojiNames.length; i++) {
 				await messageReaction.message.react(DiscordBot.emojis.find("name", emojiNames[i]));
 			}
-			await messageReaction.remove(user); //remove the wavedash emoji
+			await messageReaction.remove(user); //remove the zhuW emoji
 			removeReacts = true;
-		} else if (messageReaction.emoji.name == "icons") {
-			//add region emotes
-			removeReacts = false;
-			let emojiNames = ["WestCoast", "Midwest", "Southwest", "EastCoast", "Mexico", "Canada", "SouthAmerica", "Europe", "Australia", "Asia", "Africa"];
-			for (let i = 0; i < emojiNames.length; i++) {
-				await messageReaction.message.react(DiscordBot.emojis.find("name", emojiNames[i]));
-			}
-			await messageReaction.remove(user); //remove the icons emoji
-			removeReacts = true;
-		}
 		else {
 			let guild = messageReaction.message.member.guild;
 			let hasRole = false;
