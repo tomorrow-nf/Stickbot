@@ -1,7 +1,8 @@
 /*
-	IconsBot index.js
+	CGCC StickBot index.js
 	
-	Written by Adam "WaveParadigm" Gincel for the Icons: Combat Arena Discord Server.	
+	Originally written by Adam "WaveParadigm" Gincel for the Icons: Combat Arena Discord Server. 
+	Modified by Tyler "NFreak" Morrow for the CGCC Discord Server.
 */
 
 //@ts-check
@@ -51,15 +52,16 @@ DiscordBot.on('message', async message => {
 			await misc.cacheRoleMessages(DiscordBot);
 	}
 
-	//Content Team (and Mod) specific handlers:
+	// Content Team (and Mod) specific handlers:
+	// (Leveraging this for posting in resources channel)
 	if (misc.memberHasRole(message, "Content Team") || misc.memberIsMod(message)) {
 		await commands.contentTeamCommands(message, args);
 	}
 
-	//Check all messages for userCommands
+	// Check all messages for userCommands
 	await commands.userCommands(message, args);
 
-	//If someone asks Gifkin a question
+	// If someone asks StickBot a question
 	if (message.isMemberMentioned(DiscordBot.user) && message.content[message.content.length - 1] == "?") {
 		await misc.botReply(message, DiscordBot);
 	}
@@ -76,18 +78,6 @@ DiscordBot.on('message', async message => {
 		await misc.cacheRoleMessages(DiscordBot);
 	}
 
-	//if lastMessageDate is before 11pm EST  and now we're after, scrape website
-	if (lastMessageDate.getHours() < utcHourToCheck && new Date().getHours() >= utcHourToCheck) {
-		/*let scrape = await misc.scrapeNews(message, false);
-		console.log("Scraping news");
-		if (scrape.new) {
-			let channelToSend = scrape.type == "news" ? message.guild.channels.get(misc.ids.announcements) : message.guild.channels.get(misc.ids.patchnotes);
-			console.log("Sending " + scrape.link);
-			await channelToSend.send(scrape.link);
-		}*/ //disabling this for now as requested
-	}
-	lastMessageDate = new Date();
-
 	let reminderToSend = misc.checkReminders();
 	if (reminderToSend) {
 		let reminderChannel = mainGuild.channels.get(misc.ids.reminders);
@@ -101,7 +91,7 @@ DiscordBot.on("messageReactionAdd", async (messageReaction, user) => {
 	await reaction.handleReactionAdd(messageReaction, user, DiscordBot);
 });
 
-//Executed uon a reaction being removed from a message in the cache
+//Executed upon a reaction being removed from a message in the cache
 DiscordBot.on("messageReactionRemove", async (messageReaction, user) => {
 	await reaction.handleReactionRemove(messageReaction, user, DiscordBot);
 });
@@ -120,9 +110,9 @@ DiscordBot.login(discordToken).catch(function (reason) {
 DiscordBot.on('ready', async () => {
 	mainGuild = DiscordBot.guilds.get(misc.ids.server);
 	misc.mainGuild = mainGuild;
-	console.log('Gifkin is ready to shffl.');
+	console.log('Stickbot is ready');
 	DiscordBot.setMaxListeners(0); //done to ensure it responds to everything regardless of how busy the server gets
-	await DiscordBot.user.setActivity("Type =help for commands!");
+	await DiscordBot.user.setActivity("Type !help for commands!");
 	await misc.cacheRoleMessages(DiscordBot);
 });
 
