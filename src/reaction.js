@@ -40,7 +40,7 @@ async function handleReactionAdd(messageReaction, user, DiscordBot) {
 			}
 			await messageReaction.remove(user); //remove the zhuW emoji
 			removeReacts = true;
-		else {
+		} else {
 			let guild = messageReaction.message.member.guild;
 			let hasRole = false;
 			try {
