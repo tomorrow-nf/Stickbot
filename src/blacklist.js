@@ -67,7 +67,7 @@ function censorshipInfoAddWarning(user, word) {
 }
 
 async function blacklistAlertMods(message, violatingWord, warning) {
-	let violationChannel = message.guild.channels.find("name", "blacklist-warnings");
+	let violationChannel = message.guild.channels.find("name", "bot-log");
 	let bars = "----------------------\n";
 	if (!warning)
 		return await violationChannel.send(bars + "Removed message with violation (`" + violatingWord + "`) in #" + message.channel.name + " posted by `@" + message.author.tag + "`:\n`" + message.content + "`");
