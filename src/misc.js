@@ -131,14 +131,30 @@ async function cacheRoleMessages(DiscordBot) {
 	process.stdout.write("Cached role messages. ");
 }
 
+function galleryImagesOnly(message, user, DiscordBot) {
+	if (messageReaction.message.channel.name == "gallery") { 
+		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
+		    message.delete();
+		    console.log("Deleted non-image post from #gallery from user " + user);
+		}
+	}
+}
+
+function attachIsImage(msgAttach) {
+    let url = msgAttach.url;
+    //True if this url is a PNG or JPG image.
+    return ((url.indexOf("png", url.length - "png".length) != -1)
+	    || (url.indexOf("jpg", url.length - "jpg".length) != -1)
+	    || (url.indexOf("jpeg", url.length - "jpeg".length) != -1));
+}
+
 module.exports.delay = delay;
 module.exports.roleInRoles = roleInRoles;
 module.exports.memberIsMod = memberIsMod;
 module.exports.memberHasRole = memberHasRole;
-module.exports.giveBeta = giveBeta;
-module.exports.scrapeNews = scrapeNews;
 module.exports.cacheRoleMessages = cacheRoleMessages;
 module.exports.ids = ids;
+module.exports.galleryImagesOnly = galleryImagesOnly;
 module.exports.manageVoiceChannels = manageVoiceChannels;
 module.exports.botReply = botReply;
 module.exports.reminders = reminders;
