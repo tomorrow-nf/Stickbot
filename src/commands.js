@@ -249,19 +249,19 @@ async function modCommands(message, args) {
 		await message.channel.send("*Your primary role is your strongest skill, and also sets your name color. Secondary roles are for anything else you work with or dabble in!*");
 		await message.channel.send({
 			files: [{
-				attachment: "./img/AvailableRoles.png",
+				attachment: "./img/RolesDetails.png",
 				name: "AvailableRoles.png"
 			}]
 		});
 		await message.channel.send({
 			files: [{
-				attachment: "./img/PrimaryRoles.png",
+				attachment: "./img/RolesPrimary.png",
 				name: "PrimaryRoles.png"
 			}]
 		});
 		await message.channel.send({
 			files: [{
-				attachment: "./img/SecondaryRoles.png",
+				attachment: "./img/RolesSecondary.png",
 				name: "SecondaryRoles.png"
 			}]
 		});
