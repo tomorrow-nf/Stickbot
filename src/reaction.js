@@ -31,14 +31,14 @@ function emojiToRole(emojiName, messageID) {
 async function handleReactionAdd(messageReaction, user, DiscordBot) {
 	if (messageReaction.message.channel.name == "role-assignment") { 
 		console.log(messageReaction.emoji.name);
-		if (messageReaction.emoji.name == "zhuW") {
+		if (messageReaction.emoji.name == "cgccWhite") {
 			//add role emotes
 			removeReacts = false;
 			let emojiNames = JSON.parse(fs.readFileSync("./info/roleEmoji.json", "utf8"));
 			for (let i = 0; i < emojiNames.length; i++) {
 				await messageReaction.message.react(DiscordBot.emojis.find("name", emojiNames[i]));
 			}
-			await messageReaction.remove(user); //remove the zhuW emoji
+			await messageReaction.remove(user); //remove the cgccWhite emoji
 			removeReacts = true;
 		} else {
 			let guild = messageReaction.message.member.guild;
