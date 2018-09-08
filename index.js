@@ -64,7 +64,7 @@ DiscordBot.on('message', async message => {
 	}
 	
 	//Handle Gallery posts
-	await misc.galleryImagesOnly(message, user, DiscordBot);
+	await misc.galleryImagesOnly(message, DiscordBot);
 	
 	//Handle all blacklist removal/warning
 	let censored = await blacklist.handleBlacklist(message, DiscordBot.user.tag);
