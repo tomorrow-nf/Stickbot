@@ -104,7 +104,7 @@ DiscordBot.on("voiceStateUpdate", async(oldMember, newMember) => {
 DiscordBot.on('guildMemberAdd', async(member, event, user, userID) => {
 	let introductionsChannel = DiscordBot.channels.get(misc.ids.introductions);
 	var rulesAndRoles = " Please read through #rules-and-info, set a role in #role-assignment, and have a great time here!";
-	var ran = Math.floor(Math.random() * intros.length());
+	var ran = Math.floor(Math.random() * intros.length);
 	if ( userID === "118603282670288898" ) {
 		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw." + rulesAndRoles);
 	}
