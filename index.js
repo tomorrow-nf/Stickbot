@@ -99,7 +99,7 @@ DiscordBot.on("voiceStateUpdate", async(oldMember, newMember) => {
 
 //Executed upon a new user joining the server
 DiscordBot.on('guildMemberAdd', async(member, event, user, userID) => {
-	let introductionsChannel = mainGuild.channels.get(misc.ids.introductions);
+	let introductionsChannel = DiscordBot.channels.get(misc.ids.introductions);
 	var rulesAndRoles = " Please read through #rules-and-info, set a role in #role-assignment, and have a great time here!";
 	
 	if ( userID === "118603282670288898" ) {
