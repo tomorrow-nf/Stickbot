@@ -395,8 +395,12 @@ async function modCommands(message, args) {
 	}
 }
 
-async function userCommands(message, args) {
-	if (args[0].startsWith(commandPrefix)) {
+async function userCommands(message, user, args) {
+	if (args[0] == "!contribute") {
+		await guild.member(user).addRole(guild.roles.find("name", "Contributor"));
+		return await message.channel.send("<@!" + user.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
+	}
+	else if (args[0].startsWith(commandPrefix)) {
 		for (let i = 0; i < userCommandList.length; i++) {
 			//check through all defined userCommands
 			if (args[0] == userCommandList[i].command) {

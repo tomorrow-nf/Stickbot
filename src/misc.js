@@ -122,7 +122,7 @@ async function cacheRoleMessages(DiscordBot) {
 	process.stdout.write("Cached role messages. ");
 }
 
-async function galleryImagesOnly(message, user, DiscordBot) {
+async function galleryImagesOnly(message, user) {
 	if (message.channel.name == "gallery") { 
 		console.log("New message posted in gallery");
 		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
@@ -132,12 +132,22 @@ async function galleryImagesOnly(message, user, DiscordBot) {
 	}
 }
 
+async function removeContributor(message, user) {
+	if (message.channel.name == "resources") { 
+		console.log("New message posted in resources");
+		await guild.member(user).removeRole(guild.roles.find("name", "Contributor"));
+	}
+}
+
 function attachIsImage(msgAttach) {
     let url = msgAttach.url;
-    //True if this url is a PNG or JPG image.
+    //True if this url is a PNG or JPG image. Kind of hacky to ignore case
     return ((url.indexOf("png", url.length - "png".length) != -1)
 	    || (url.indexOf("jpg", url.length - "jpg".length) != -1)
-	    || (url.indexOf("jpeg", url.length - "jpeg".length) != -1));
+	    || (url.indexOf("jpeg", url.length - "jpeg".length) != -1)
+		|| (url.indexOf("PNG", url.length - "PNG".length) != -1)
+	    || (url.indexOf("JPG", url.length - "JPG".length) != -1)
+	    || (url.indexOf("JPEG", url.length - "JPEG".length) != -1));
 }
 
 module.exports.delay = delay;
