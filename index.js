@@ -60,6 +60,9 @@ DiscordBot.on('message', async message => {
 		await misc.botReply(message, DiscordBot);
 	}
 	
+	//Handle Gallery posts
+	await.misc.galleryImagesOnly(message, user, DiscordBot);
+	
 	//Handle all blacklist removal/warning
 	let censored = await blacklist.handleBlacklist(message, DiscordBot.user.tag);
 	if (!censored) {
@@ -93,6 +96,20 @@ DiscordBot.on("messageReactionRemove", async (messageReaction, user) => {
 DiscordBot.on("voiceStateUpdate", async(oldMember, newMember) => {
 	await misc.manageVoiceChannels(newMember.guild);
 })
+
+//Executed upon a new user joining the server
+DiscordBot.on('guildMemberAdd', function(member, event, user, userID){
+	let introductionsChannel = message.guild.channels.find("name", "introductions");
+	var rulesAndRoles = " Please read through #rules-and-info, set a role in #role-assignment, and have a great time here!";
+	
+	if ( userID === "118603282670288898" ) {
+		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw." + rulesAndRoles);
+	}
+	else {
+		await introductionsChannel.send(misc.generateIntroText() + "<@!" + event.d.user.id + ">" + "!" + rulesAndRoles);
+	}
+});
+
 
 //Log into Discord using /info/DiscordToken.txt
 console.log("Time to log in.");

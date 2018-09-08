@@ -187,8 +187,6 @@ async function modCommands(message, args) {
 			s += helpString[0];
 		else
 			s += helpString[parseInt(args[1])];
-		s += "-----\n";
-		s += "`!contenthelp` - Commands for the Content Team.\n";
 		s += "`!help` - Commands for all users.\n";
 		s += "Try `!modhelp 0` or `!modhelp 1` for more commands.";
 		await message.channel.send(s);

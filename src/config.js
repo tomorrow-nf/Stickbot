@@ -81,6 +81,12 @@ function configure() {
 		fs.writeFileSync("./info/reminders.json", "[]", "utf8");
 		console.log("./info/reminders.json created. A list of objects with Dates and Messages, sent to the ids.reminders channel once the given date is passed.");
 	}	
+	
+	if (!fs.existsSync("./info/intros.json")) {
+		didConfigure = true;
+		fs.writeFileSync("./info/intros.json", "[]", "utf8");
+		console.log("./info/intros.json created. This should be a comma separated list of introduction strings to send when a new user joins.");
+	}	
 
 	if (didConfigure) {
 		console.log("Configuration complete.");

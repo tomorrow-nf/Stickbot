@@ -4,6 +4,7 @@
     Handles adding/removing to/from a given blacklist, removing messages containing those words and/or notifying mods about messages that may or may not contain them.
 
     Written by Adam "WaveParadigm" Gincel for the Icons: Combat Arena Discord Server.	
+	Modified by Tyler "NFreak" Morrow for the CustomGCC Discord server.
 */
 
 const fs = require("fs");
@@ -93,7 +94,7 @@ async function handleBlacklist(message, DiscordBotTag) {
 		await message.delete();
 
 		try {
-			let warning = await message.author.send("Please refrain from using language like '" + censoredWord + "' on the Icons server.\n\n`" + message.content + "`");
+			let warning = await message.author.send("Please refrain from using language like '" + censoredWord + "' on the CGCC server.\n\n`" + message.content + "`");
 		} catch (e) {
 			let warning = await message.channel.send("<@" + message.author.id + ">, please refrain from using that language on this server.");
 			warning.delete(2250);
