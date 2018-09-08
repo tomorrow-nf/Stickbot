@@ -123,6 +123,7 @@ async function cacheRoleMessages(DiscordBot) {
 
 function galleryImagesOnly(message, user, DiscordBot) {
 	if (messageReaction.message.channel.name == "gallery") { 
+		console.log("New message posted in gallery");
 		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
 		    message.delete();
 		    console.log("Deleted non-image post from #gallery from user " + user);
