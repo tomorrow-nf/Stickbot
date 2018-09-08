@@ -65,7 +65,7 @@ function checkReminders() {
 
 function memberIsMod(message) {
 	let ret = false;
-	const modNames = ["Admin", "Mod", "Founder"];
+	const modNames = ["Admin", "Moderator", "Founder", "Stickbot"];
 	for (let i = 0; i < modNames.length; i++) {
 		ret = ret || memberHasRole(message, modNames[i]);		
 	}

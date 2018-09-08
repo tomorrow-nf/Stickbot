@@ -52,12 +52,6 @@ DiscordBot.on('message', async message => {
 			await misc.cacheRoleMessages(DiscordBot);
 	}
 
-	// Content Team (and Mod) specific handlers:
-	// (Leveraging this for posting in resources channel)
-	if (misc.memberHasRole(message, "Content Team") || misc.memberIsMod(message)) {
-		await commands.contentTeamCommands(message, args);
-	}
-
 	// Check all messages for userCommands
 	await commands.userCommands(message, args);
 
