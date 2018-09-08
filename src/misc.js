@@ -66,7 +66,7 @@ function checkReminders() {
 
 function memberIsMod(message) {
 	let ret = false;
-	const modNames = ["Admin", "Moderator", "Founder", "Stickbot"];
+	const modNames = ["Admins", "Moderators", "Founders", "StickBot"];
 	for (let i = 0; i < modNames.length; i++) {
 		ret = ret || memberHasRole(message, modNames[i]);		
 	}
@@ -103,8 +103,8 @@ async function botReply(message, DiscordBot) {
 }
 
 async function cacheRoleMessages(DiscordBot) {
-	await DiscordBot.channels.get(ids.roles).fetchMessages({limit: 50}); //get back messages from the #role-assignment channel
-	let messages = DiscordBot.channels.get(ids.roles).messages;
+	await DiscordBot.channels.get(ids.roleassignment).fetchMessages({limit: 50}); //get back messages from the #role-assignment channel
+	let messages = DiscordBot.channels.get(ids.roleassignment).messages;
 	let keys = messages.keyArray();
 	for (let i = 0; i < keys.length; i++) {
 		let reactionKeys = messages.get(keys[i]).reactions.keyArray();
@@ -122,22 +122,33 @@ async function cacheRoleMessages(DiscordBot) {
 	process.stdout.write("Cached role messages. ");
 }
 
-async function galleryImagesOnly(message, user, DiscordBot) {
-	if (messageReaction.message.channel.name == "gallery") { 
+async function galleryImagesOnly(message) {
+	if (message.channel.name == "gallery") { 
 		console.log("New message posted in gallery");
 		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
 		    message.delete();
-		    console.log("Deleted non-image post from #gallery from user " + user);
+		    console.log("Deleted non-image post from #gallery from user " + message.author);
 		}
+	}
+}
+
+async function removeContributor(message) {
+	let guild = message.member.guild;
+	if (message.channel.name == "resources") { 
+		console.log("New message posted in resources");
+		await guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
 	}
 }
 
 function attachIsImage(msgAttach) {
     let url = msgAttach.url;
-    //True if this url is a PNG or JPG image.
+    //True if this url is a PNG or JPG image. Kind of hacky to ignore case
     return ((url.indexOf("png", url.length - "png".length) != -1)
 	    || (url.indexOf("jpg", url.length - "jpg".length) != -1)
-	    || (url.indexOf("jpeg", url.length - "jpeg".length) != -1));
+	    || (url.indexOf("jpeg", url.length - "jpeg".length) != -1)
+		|| (url.indexOf("PNG", url.length - "PNG".length) != -1)
+	    || (url.indexOf("JPG", url.length - "JPG".length) != -1)
+	    || (url.indexOf("JPEG", url.length - "JPEG".length) != -1));
 }
 
 module.exports.delay = delay;
@@ -147,6 +158,7 @@ module.exports.memberHasRole = memberHasRole;
 module.exports.cacheRoleMessages = cacheRoleMessages;
 module.exports.ids = ids;
 module.exports.galleryImagesOnly = galleryImagesOnly;
+module.exports.removeContributor = removeContributor;
 module.exports.botReply = botReply;
 module.exports.reminders = reminders;
 module.exports.addReminder = addReminder;

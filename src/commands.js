@@ -17,7 +17,7 @@ let helpString = ["", ""];
 helpString[0] += "`!members` - Tell us how many members are on a server, and how many are online.\n";
 helpString[0] += "`!top PLACEMENTS NUM_MESSAGES CHANNEL_NAME` - Tells you the top `PLACEMENTS` most frequent posters over the last `NUM_MESSAGES` messages in #`CHANNEL_NAME` (more messages = more time)\n";
 helpString[0] += "`!setcommand COMMAND_NAME text` - Will create a user-accessible =`COMMAND_NAME` that will make Gifkin return any text after `COMMAND_NAME`.\n";
-helpString[0] += "`!describecommand COMMAND_NAME description` - Adds a description to display in `=help` for the users.\n";
+helpString[0] += "`!describecommand COMMAND_NAME description` - Adds a description to display in `!help` for the users.\n";
 helpString[0] += "`!removecommand COMMAND_NAME` - Will remove the user-accessible =`COMMAND_NAME`, if it exists.\n";
 helpString[0] += "`!hidecommand COMMAND_NAME` - Toggles visibility of a help command.\n";
 helpString[0] += "`!helpcount` - Show number of uses each user command has recieved.\n";
@@ -95,7 +95,7 @@ async function modCommands(message, args) {
 		}
 	} else if (args[0] == "!top") {
 		if (args.length < 4) {
-			return await message.channel.send("USAGE: `=top PLACEMENTS QUANTITY_MESSAGES CHANNEL_NAME` -- For Example `=top 5 10000 general` would return the Top 5 posters over the last 10000 messages in #general.");
+			return await message.channel.send("USAGE: `!top PLACEMENTS QUANTITY_MESSAGES CHANNEL_NAME` -- For Example `!top 5 10000 general` would return the Top 5 posters over the last 10000 messages in #general.");
 		}
 		let quantity_messages = 0;
 		let relevant_channel = "";
@@ -152,7 +152,7 @@ async function modCommands(message, args) {
 		return await resultsMessage.edit(str);
 	} else if (args[0] == "!purge") {
 		if (args.length < 3)
-			return await message.channel.send("USAGE: `=purge CHANNEL QUANTITY` -- example: `=purge general 100` will delete the last 100 messages in #general.");
+			return await message.channel.send("USAGE: `!purge CHANNEL QUANTITY` -- example: `!purge general 100` will delete the last 100 messages in #general.");
 
 		let relevant_channel = null;
 		let quantity_messages = 0;
@@ -298,7 +298,7 @@ async function modCommands(message, args) {
 		}
 	} else if (args[0] == "!setcommand") {
 		if (args.length < 3) {
-			return await message.channel.send("USAGE: `!setcommand COMMAND_NAME text` -- For example the command `!setcommand controllers Here's some useful controller info!` would create a command `=controllers` that woult print `Here's some useful controller info!`.");
+			return await message.channel.send("USAGE: `!setcommand COMMAND_NAME text` -- For example the command `!setcommand controllers Here's some useful controller info!` would create a command `!controllers` that would print `Here's some useful controller info!`.");
 		} else {
 			//first check if such a command already exists
 			let exists = false;
@@ -325,7 +325,7 @@ async function modCommands(message, args) {
 		}
 	} else if (args[0] == "!removecommand") {
 		if (args.length < 2) {
-			return await message.channel.send("USAGE: `=removecommand COMMAND_NAME` - For example `=removecommand controllers` would remove the `=controllers` command.");
+			return await message.channel.send("USAGE: `!removecommand COMMAND_NAME` - For example `!removecommand controllers` would remove the `!controllers` command.");
 		}
 
 		for (let i = 0; i < userCommandList.length; i++) {
@@ -338,7 +338,7 @@ async function modCommands(message, args) {
 		return await message.channel.send("Removed `" + commandPrefix + args[1] + "`.");
 	} else if (args[0] == "!describecommand") {
 		if (args.length < 3) {
-			return await message.channel.send("USAGE: `=describecommand COMMAND_NAME description` - For example `=describecommand controllers Controller support info.` would set the description of `=controllers` to `Controller support info.`");
+			return await message.channel.send("USAGE: `!describecommand COMMAND_NAME description` - For example `!describecommand controllers Controller support info.` would set the description of `!controllers` to `Controller support info.`");
 		}
 
 		//first find the relevant element index
@@ -359,7 +359,7 @@ async function modCommands(message, args) {
 		}
 	} else if (args[0] == "!hidecommand") {
 		if (args.length < 2)
-			return await message.channel.send("USAGE: `=hidecommand COMMANDNAME` ie to hide the `=ping` command type `=hidecommand ping`.");
+			return await message.channel.send("USAGE: `!hidecommand COMMANDNAME` ie to hide the `!ping` command type `!hidecommand ping`.");
 		if (args[1][0] == commandPrefix) //remove user-typed prefix if it exists
 			args[1] = args[1].substring(1);
 		let index = -1;
@@ -396,7 +396,21 @@ async function modCommands(message, args) {
 }
 
 async function userCommands(message, args) {
-	if (args[0].startsWith(commandPrefix)) {
+	if (args[0] == "!contribute") {
+		let guild = message.member.guild;
+		await guild.member(message.author).addRole(guild.roles.find("name", "Contributor"));
+		return await message.channel.send("<@!" + message.author.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
+	}
+	else if (args[0] == "!help") {
+		let userHelpString = "`!contribute` - Allows you to submit a single post to #resources\n";
+		for (let i = 0; i < userCommandList.length; i++) {
+			if (!userCommandList[i].hide){
+				userHelpString += "`" + userCommandList[i].command + "` -  " + userCommandList[i].description + "\n";
+			}
+		}
+		return await message.channel.send("Here's a list of commands for all users:\n" + userHelpString);
+	}
+	else if (args[0].startsWith(commandPrefix)) {
 		for (let i = 0; i < userCommandList.length; i++) {
 			//check through all defined userCommands
 			if (args[0] == userCommandList[i].command) {
