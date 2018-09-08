@@ -157,6 +157,7 @@ module.exports.memberHasRole = memberHasRole;
 module.exports.cacheRoleMessages = cacheRoleMessages;
 module.exports.ids = ids;
 module.exports.galleryImagesOnly = galleryImagesOnly;
+module.exports.removeContributor = removeContributor;
 module.exports.botReply = botReply;
 module.exports.reminders = reminders;
 module.exports.addReminder = addReminder;
