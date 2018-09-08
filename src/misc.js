@@ -12,6 +12,7 @@ const uuid = require("uuid/v4");
 const ids = JSON.parse(fs.readFileSync("./info/ids.json", "utf8"));
 
 let reminders = JSON.parse(fs.readFileSync("./info/reminders.json", "utf8"));
+let intros = JSON.parse(fs.readFileSync("./info/intros.json", "utf8"));
 let mainGuild = null;
 
 let isCheckingVoice = false;
@@ -61,6 +62,13 @@ function checkReminders() {
 		}
 	}
 	return null;
+}
+
+function generateIntroText() {
+	var ran = Math.floor(Math.random() * 6) + 1;
+	for (let i = 0; i < intros.length; i++) {
+		return intros[i];
+	}
 }
 
 function memberIsMod(message) {
