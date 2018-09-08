@@ -238,7 +238,7 @@ async function modCommands(message, args) {
 			return await message.channel.send("Invalid number of days provided.");
 		}
 	} else if (args[0] == "!roleassign") {
-
+		console.log("Setting up role assignment channel");
 		await message.channel.send({
 			files: [{
 				attachment: "./img/HeaderRoles.png",
