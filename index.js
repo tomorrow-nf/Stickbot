@@ -109,7 +109,7 @@ DiscordBot.on('guildMemberAdd', async(member, event, user, userID) => {
 		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw." + rulesAndRoles);
 	}
 	else {
-		await introductionsChannel.send(intros[ran] + "<@!" + event.d.user.id + ">" + "!" + rulesAndRoles);
+		await introductionsChannel.send(intros[ran] + "<@!" + userID + ">" + "!" + rulesAndRoles);
 	}
 });
 
