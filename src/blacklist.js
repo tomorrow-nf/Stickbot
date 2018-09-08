@@ -155,7 +155,7 @@ async function handleBlacklistCommands(message, args) {
 				fs.writeFileSync('./info/blacklist.json', JSON.stringify(blacklist), 'utf8');
 				await message.channel.send("`" + args[2] + "` has been added to the blacklist.");
 			} else {
-				await message.channel.send("Usage: `=blacklist add word`");
+				await message.channel.send("Usage: `!blacklist add word`");
 			}
 		} else if (args.length > 1 && args[1] == "remove") {
 			if (args.length > 2) {
@@ -168,7 +168,7 @@ async function handleBlacklistCommands(message, args) {
 					await message.channel.send("`" + args[2] + "` was not found in the blacklist.");
 				}
 			} else {
-				await message.channel.send("Usage: `=blacklist remove word`");
+				await message.channel.send("Usage: `!blacklist remove word`");
 			}
 		} else if (args.length > 1 && args[1] == "violations") {
 			if (args.length > 2) {
@@ -185,7 +185,7 @@ async function handleBlacklistCommands(message, args) {
 					await message.channel.send("Could not find a user by that ID or tag.");
 				}
 			} else {
-				await message.channel.send("Usage: `=blacklist violations ID|Tag`");
+				await message.channel.send("Usage: `!blacklist violations ID|Tag`");
 			}
 		} else if (args.length > 1 && args[1] == "warnings") {
 			if (args.length > 2) {
@@ -202,7 +202,7 @@ async function handleBlacklistCommands(message, args) {
 					await message.channel.send("Could not find a user by that ID or tag.");
 				}
 			} else {
-				await message.channel.send("Usage: `=blacklist warnings ID|Tag`");
+				await message.channel.send("Usage: `!blacklist warnings ID|Tag`");
 			}
 		} 
 	} else if (args[0] == "!log" && misc.memberIsMod(message)) {
