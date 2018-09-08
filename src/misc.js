@@ -121,7 +121,7 @@ async function cacheRoleMessages(DiscordBot) {
 	process.stdout.write("Cached role messages. ");
 }
 
-function galleryImagesOnly(message, user, DiscordBot) {
+async function galleryImagesOnly(message, user, DiscordBot) {
 	if (messageReaction.message.channel.name == "gallery") { 
 		console.log("New message posted in gallery");
 		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
