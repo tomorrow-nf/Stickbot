@@ -205,7 +205,7 @@ async function modCommands(message, args) {
 	} else if (args[0] == "!say") {
 		
 		if (args.length < 3) {
-			return await message.channel.send("USAGE: `=say CHANNEL MESSAGE` -- example: `!say general Hello world!`");
+			return await message.channel.send("USAGE: `!say CHANNEL MESSAGE` -- example: `!say general Hello world!`");
 		}
 		let len = args[0].length + args[1].length + 2;
 		if (args[1].startsWith("#")) {
@@ -255,14 +255,31 @@ async function modCommands(message, args) {
 		});
 		await message.channel.send({
 			files: [{
+				attachment: "./img/Roles1.png",
+				name: "Roles1.png"
+			}]
+		});await message.channel.send({
+			files: [{
+				attachment: "./img/Roles2.png",
+				name: "Roles2.png"
+			}]
+		});await message.channel.send({
+			files: [{
+				attachment: "./img/Roles3.png",
+				name: "Roles3.png"
+			}]
+		});
+		await message.channel.send("**Set your roles below**");
+		await message.channel.send({
+			files: [{
 				attachment: "./img/RolesPrimary.png",
-				name: "PrimaryRoles.png"
+				name: "RolesPrimary.png"
 			}]
 		});
 		await message.channel.send({
 			files: [{
 				attachment: "./img/RolesSecondary.png",
-				name: "SecondaryRoles.png"
+				name: "RolesSecondary.png"
 			}]
 		});
 	} else if (args[0] == "!emotelist") {
@@ -283,7 +300,7 @@ async function modCommands(message, args) {
 		}
 	} else if (args[0] == "!setcommand") {
 		if (args.length < 3) {
-			return await message.channel.send("USAGE: `!setcommand COMMAND_NAME text` -- For example the command `=setcommand controllers Here's some useful controller info!` would create a command `=controllers` that woult print `Here's some useful controller info!`.");
+			return await message.channel.send("USAGE: `!setcommand COMMAND_NAME text` -- For example the command `!setcommand controllers Here's some useful controller info!` would create a command `=controllers` that woult print `Here's some useful controller info!`.");
 		} else {
 			//first check if such a command already exists
 			let exists = false;
