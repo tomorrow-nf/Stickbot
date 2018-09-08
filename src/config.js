@@ -61,7 +61,7 @@ function configure() {
 	if (!fs.existsSync("./info/roleEmoji.json")) {
 		didConfigure = true;
 		fs.writeFileSync("./info/roleEmoji.json", "[]", "utf8");
-		console.log("./info/roleEmoji.json created. This list is what gets added to any message in the role-assignment channel after it sees a :zhuW: react. Configured with the !emotelist command.");
+		console.log("./info/roleEmoji.json created. This list is what gets added to any message in the role-assignment channel after it sees a :cgccWhite: react. Configured with the !emotelist command.");
 	}
 
 	if (!fs.existsSync("./info/todo.json")) {
