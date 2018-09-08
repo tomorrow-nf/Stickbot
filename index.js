@@ -98,7 +98,7 @@ DiscordBot.on("voiceStateUpdate", async(oldMember, newMember) => {
 })
 
 //Executed upon a new user joining the server
-DiscordBot.on('guildMemberAdd', function(member, event, user, userID){
+DiscordBot.on('guildMemberAdd', async(member, event, user, userID){
 	let introductionsChannel = message.guild.channels.find("name", "introductions");
 	var rulesAndRoles = " Please read through #rules-and-info, set a role in #role-assignment, and have a great time here!";
 	
