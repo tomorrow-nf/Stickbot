@@ -244,13 +244,6 @@ async function modCommands(message, args) {
 			}]
 		});
 		await message.channel.send("CGCC has a number of controller modding skill roles! Here, you can use Discord reactions to assign your server-wide roles. Just click on the color-coded emote reactions below, and you'll be automatically assigned a role. To remove a role from yourself, just react again!");
-		await message.channel.send("*Your primary role is your strongest skill, and also sets your name color. Secondary roles are for anything else you work with or dabble in!*");
-		await message.channel.send({
-			files: [{
-				attachment: "./img/RolesDetails.png",
-				name: "AvailableRoles.png"
-			}]
-		});
 		await message.channel.send({
 			files: [{
 				attachment: "./img/Roles1.png",
@@ -268,6 +261,7 @@ async function modCommands(message, args) {
 			}]
 		});
 		await message.channel.send("**Set your roles below**");
+		await message.channel.send("*Your primary role is your strongest skill, and also sets your name color. Secondary roles are for anything else you work with or dabble in!*");
 		await message.channel.send({
 			files: [{
 				attachment: "./img/RolesPrimary.png",
