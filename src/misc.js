@@ -122,20 +122,21 @@ async function cacheRoleMessages(DiscordBot) {
 	process.stdout.write("Cached role messages. ");
 }
 
-async function galleryImagesOnly(message, user) {
+async function galleryImagesOnly(message) {
 	if (message.channel.name == "gallery") { 
 		console.log("New message posted in gallery");
 		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
 		    message.delete();
-		    console.log("Deleted non-image post from #gallery from user " + user);
+		    console.log("Deleted non-image post from #gallery from user " + message.author);
 		}
 	}
 }
 
-async function removeContributor(message, user) {
+async function removeContributor(message) {
+	let guild = message.member.guild;
 	if (message.channel.name == "resources") { 
 		console.log("New message posted in resources");
-		await guild.member(user).removeRole(guild.roles.find("name", "Contributor"));
+		await guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
 	}
 }
 

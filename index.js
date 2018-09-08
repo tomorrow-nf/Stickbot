@@ -64,10 +64,10 @@ DiscordBot.on('message', async message => {
 	}
 	
 	//Handle Gallery posts
-	await misc.galleryImagesOnly(message, user);
+	await misc.galleryImagesOnly(message);
 	
 	//Remove Contributor role after a single post
-	await misc.removeContributor(message, user);
+	await misc.removeContributor(message);
 	
 	//Handle all blacklist removal/warning
 	let censored = await blacklist.handleBlacklist(message, DiscordBot.user.tag);
