@@ -101,15 +101,15 @@ DiscordBot.on("voiceStateUpdate", async(oldMember, newMember) => {
 })
 
 //Executed upon a new user joining the server
-DiscordBot.on('guildMemberAdd', async(member, event, user, userID) => {
+DiscordBot.on('guildMemberAdd', async(member) => {
 	let introductionsChannel = DiscordBot.channels.get(misc.ids.introductions);
-	var rulesAndRoles = " Please read through #rules-and-info, set a role in #role-assignment, and have a great time here!";
+	var rulesAndRoles = " Please read through #rules-and-info, set a role in #" + misc.ids.roles + ", and have a great time here!";
 	var ran = Math.floor(Math.random() * intros.length);
-	if ( userID === "118603282670288898" ) {
+	if (member.id === "118603282670288898" ) {
 		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw." + rulesAndRoles);
 	}
 	else {
-		await introductionsChannel.send(intros[ran] + "<@!" + userID + ">" + "!" + rulesAndRoles);
+		await introductionsChannel.send(intros[ran] + "<@!" + member.id + ">" + "!" + rulesAndRoles);
 	}
 });
 
