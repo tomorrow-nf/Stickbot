@@ -118,16 +118,6 @@ async function cacheRoleMessages(DiscordBot) {
 			}
 		}
 	}
-
-	let feedbacks = JSON.parse(fs.readFileSync("./info/feedbacks.json", "utf8"));
-	keys = Object.keys(feedbacks);
-	for (let i = 0; i < keys.length; i++) {
-		feedbacks[keys[i]].count -= 1;
-		if (feedbacks[keys[i]].count < 0)
-			feedbacks[keys[i]].count = 0;
-	}
-	fs.writeFileSync("./info/feedbacks.json", JSON.stringify(feedbacks), "utf8");
-
 	process.stdout.write("Cached role messages. ");
 }
 
