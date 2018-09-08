@@ -401,6 +401,15 @@ async function userCommands(message, args) {
 		await guild.member(message.author).addRole(guild.roles.find("name", "Contributor"));
 		return await message.channel.send("<@!" + message.author.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
 	}
+	else if (args[0] == "!help") {
+		let userHelpString = "`!contribute` - Allows you to submit a single post to #resources\n";
+		for (let i = 0; i < userCommandList.length; i++) {
+			if (!userCommandList[i].hide){
+				userHelpString += "`" + userCommandList[i].command + "` -  " + userCommandList[i].description + "\n";
+			}
+		}
+		return await message.channel.send("Here's a list of commands for all users:\n" + userHelpString);
+	}
 	else if (args[0].startsWith(commandPrefix)) {
 		for (let i = 0; i < userCommandList.length; i++) {
 			//check through all defined userCommands
