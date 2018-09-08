@@ -64,13 +64,6 @@ function checkReminders() {
 	return null;
 }
 
-function generateIntroText() {
-	var ran = Math.floor(Math.random() * 6) + 1;
-	for (let i = 0; i < intros.length; i++) {
-		return intros[i];
-	}
-}
-
 function memberIsMod(message) {
 	let ret = false;
 	const modNames = ["Admin", "Moderator", "Founder", "Stickbot"];
