@@ -14,9 +14,9 @@ const emojiRoleDict = {
 	"cgccPurple": "Button Creator",
 	"cgccGreen": "Controller Painter",
 	"cgccOrange": "Functional Modder",
-	"cgccBlue": "Electrical Modder",
+	"cgccTeal": "Electrical Modder",
 	"cgccLime": "Graphic Designer",
-	"cgccYellow": "Cable Modder"
+	"cgccPink": "Cable Modder"
 }
 
 function emojiToRole(emojiName, messageID) {
