@@ -103,8 +103,8 @@ async function botReply(message, DiscordBot) {
 }
 
 async function cacheRoleMessages(DiscordBot) {
-	await DiscordBot.channels.get(ids.roles).fetchMessages({limit: 50}); //get back messages from the #role-assignment channel
-	let messages = DiscordBot.channels.get(ids.roles).messages;
+	await DiscordBot.channels.get(ids.roleassignment).fetchMessages({limit: 50}); //get back messages from the #role-assignment channel
+	let messages = DiscordBot.channels.get(ids.roleassignment).messages;
 	let keys = messages.keyArray();
 	for (let i = 0; i < keys.length; i++) {
 		let reactionKeys = messages.get(keys[i]).reactions.keyArray();
@@ -123,7 +123,7 @@ async function cacheRoleMessages(DiscordBot) {
 }
 
 async function galleryImagesOnly(message, user, DiscordBot) {
-	if (messageReaction.message.channel.name == "gallery") { 
+	if (message.channel.name == "gallery") { 
 		console.log("New message posted in gallery");
 		if (!(message.attachments.size > 0 && message.attachments.every(attachIsImage))) {
 		    message.delete();
