@@ -405,7 +405,7 @@ async function userCommands(message, args) {
 		let exists = false;
 		for (let i = 0; i < challengeList.length; i++) {
 			if (challengeList[i].user == message.author) {
-				challengeList[i].entry = args[2];
+				challengeList[i].entry = args[1];
 				exists = true;
 			}
 		}
