@@ -404,24 +404,24 @@ async function userCommands(message, args) {
 		//first check if this user has an entry already
 		let exists = false;
 		for (let i = 0; i < challengeList.length; i++) {
-			if (challengeList[i].ID == message.author) {
+			if (challengeList[i].ID == message.author.toString()) {
 				challengeList[i].entry = args[1].toString();
 				exists = true;
 			}
 		}
 		if (exists) {
-			console.log("Updating entry for user : " + message.author.tag + "to " + args[1].toString());
+			console.log("Updating entry for user : " + message.author.username + "to " + args[1].toString());
 			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Your challenge entry has been updated! Good luck!");
 		}
 		else { 
 			let toAdd = {
-				"user": message.author.toString(),
+				"user": message.author.username,
 				"ID": message.author.toString(),
 				"entry": args[1].toString(),
 			}
 			challengeList.push(toAdd);
-			console.log("Submitting entry for user : " + message.author.tag + " - " + args[1].toString());
+			console.log("Submitting entry for user : " + message.author.username + " - " + args[1].toString());
 			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 		}
