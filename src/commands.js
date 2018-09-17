@@ -410,6 +410,7 @@ async function userCommands(message, args) {
 			}
 		}
 		if (exists) {
+			console.log("Updating entry for user : " + message.author + "to " + args[1]);
 			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Your challenge entry has been updated! Good luck!");
 		}
@@ -419,6 +420,7 @@ async function userCommands(message, args) {
 				"entry": args[1],
 			}
 			challengeList.push(toAdd);
+			console.log("Submitting entry for user : " + message.author + " - " + args[1]);
 			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 		}
