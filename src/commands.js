@@ -8,6 +8,7 @@
 const fs = require("fs");
 const misc = require("./misc.js");
 const blacklist = require("./blacklist.js");
+let challengeList = JSON.parse(fs.readFileSync("./info/challenge.json", "utf8"));
 let todoList = JSON.parse(fs.readFileSync("./info/todo.json", "utf8"));
 let userCommandList = JSON.parse(fs.readFileSync("./info/userCommands.json", "utf8"));
 
@@ -395,8 +396,36 @@ async function userCommands(message, args) {
 		await guild.member(message.author).addRole(guild.roles.find("name", "Contributor"));
 		return await message.channel.send("<@!" + message.author.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
 	}
+	else if (args[0] == "!challenge") {
+		if (args.length != 2) {
+			return await message.channel.send("USAGE: `!challenge LINK-TO-CONTEST-ENTRY`");
+		} 
+		
+		//first check if this user has an entry already
+		let exists = false;
+		for (let i = 0; i < challengeList.length; i++) {
+			if (challengeList[i].user == message.author) {
+				challengeList[i].entry = args[2];
+				exists = true;
+			}
+		}
+		if (exists) {
+			fs.writeFileSync('./info/challenge.json', JSON.stringify(challengeList, null, "\t"));
+			return await message.channel.send("Your challenge entry has been updated! Good luck!");
+		}
+		else { 
+			let toAdd = {
+				"user": message.author,
+				"entry": args[1],
+			}
+			challengeList.push(toAdd);
+			fs.writeFileSync('./info/challenge.json', JSON.stringify(challengeList, null, "\t"));
+			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
+		}
+	}
 	else if (args[0] == "!help") {
 		let userHelpString = "`!contribute` - Allows you to submit a single post to #resources\n";
+		userHelpString += "`!challenge` - Submit or update your entry to the current challenge\n";
 		for (let i = 0; i < userCommandList.length; i++) {
 			if (!userCommandList[i].hide){
 				userHelpString += "`" + userCommandList[i].command + "` -  " + userCommandList[i].description + "\n";

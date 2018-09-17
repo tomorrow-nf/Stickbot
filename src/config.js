@@ -38,7 +38,7 @@ function configure() {
 		fs.writeFileSync("./info/censorshipInfo.csv", "", "utf8");
 		console.log("./info/censorshipInfo.json and .csv created.");
 	}
-
+	
 	if (!fs.existsSync("./info/discordToken.txt")) {
 		didConfigure = true;
 		console.log("Discord Token text file not found. This file should contain your Discord Bot token.");
@@ -87,6 +87,12 @@ function configure() {
 		fs.writeFileSync("./info/intros.json", "[]", "utf8");
 		console.log("./info/intros.json created. This should be a comma separated list of introduction strings to send when a new user joins.");
 	}	
+	
+	if (!fs.existsSync("./info/challenge.json")) {
+		didConfigure = true;
+		fs.writeFileSync("./info/challenge.json", "[]", "utf8");
+		console.log("./info/challenge.json created. This contains entries to the current CGCC challenge.");
+	}
 
 	if (didConfigure) {
 		console.log("Configuration complete.");
