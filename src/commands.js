@@ -410,7 +410,7 @@ async function userCommands(message, args) {
 			}
 		}
 		if (exists) {
-			fs.writeFileSync('./info/challenge.json', JSON.stringify(challengeList, null, "\t"));
+			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Your challenge entry has been updated! Good luck!");
 		}
 		else { 
@@ -419,7 +419,7 @@ async function userCommands(message, args) {
 				"entry": args[1],
 			}
 			challengeList.push(toAdd);
-			fs.writeFileSync('./info/challenge.json', JSON.stringify(challengeList, null, "\t"));
+			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 		}
 	}
