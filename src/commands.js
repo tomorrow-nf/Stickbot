@@ -396,7 +396,7 @@ async function userCommands(message, args) {
 		await guild.member(message.author).addRole(guild.roles.find("name", "Contributor"));
 		return await message.channel.send("<@!" + message.author.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
 	}
-	else if (args[0] == "!challenge") {
+	/*else if (args[0] == "!challenge") {
 		if (args.length != 2) {
 			return await message.channel.send("USAGE: `!challenge LINK-TO-CONTEST-ENTRY`");
 		} 
@@ -425,10 +425,10 @@ async function userCommands(message, args) {
 			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 		}
-	}
+	}*/
 	else if (args[0] == "!help") {
 		let userHelpString = "`!contribute` - Allows you to submit a single post to #resources\n";
-		userHelpString += "`!challenge` - Submit or update your entry to the current challenge\n";
+		//userHelpString += "`!challenge` - Submit or update your entry to the current challenge\n";
 		for (let i = 0; i < userCommandList.length; i++) {
 			if (!userCommandList[i].hide){
 				userHelpString += "`" + userCommandList[i].command + "` -  " + userCommandList[i].description + "\n";
