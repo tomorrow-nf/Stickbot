@@ -389,6 +389,18 @@ async function modCommands(message, args) {
 		}
 		return await message.channel.send(s);
 	}
+	else if (args[0] == "!getvotes") {
+		if (args.length != 2) {
+			return await message.channel.send("USAGE: `!getvotes ENTRY-NUMBER`");
+		} 
+		let total = 0;
+		for (let i = 0; i < voteList.length; i++) {
+			if (voteList[i] == args[1]){
+				total++;
+			}
+		}
+		return await message.channel.send("Total votes for entry " + args[1] + ": " + total);
+	}
 }
 
 async function userCommands(message, args) {
@@ -434,7 +446,6 @@ async function userCommands(message, args) {
 		if (args.length != 2) {
 			return await message.channel.send("USAGE: `!vote ENTRY-NUMBER`");
 		} 
-		let acceptedOrUpdated = "";
 		//first check if this user has voted already
 		let exists = false;
 		for (let i = 0; i < voteList.length; i++) {
