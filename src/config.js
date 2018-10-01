@@ -93,6 +93,12 @@ function configure() {
 		fs.writeFileSync("./info/challenge.json", "[]", "utf8");
 		console.log("./info/challenge.json created. This contains entries to the current CGCC challenge.");
 	}
+	
+	if (!fs.existsSync("./info/votes.json")) {
+		didConfigure = true;
+		fs.writeFileSync("./info/votes.json", "[]", "utf8");
+		console.log("./info/votes.json created. This contains votes to the current CGCC challenge.");
+	}
 
 	if (didConfigure) {
 		console.log("Configuration complete.");

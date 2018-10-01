@@ -8,7 +8,8 @@
 const fs = require("fs");
 const misc = require("./misc.js");
 const blacklist = require("./blacklist.js");
-let challengeList = JSON.parse(fs.readFileSync("./info/challenge.json", "utf8"));
+//let challengeList = JSON.parse(fs.readFileSync("./info/challenge.json", "utf8"));
+let voteList = JSON.parse(fs.readFileSync("./info/votes.json", "utf8"));
 let todoList = JSON.parse(fs.readFileSync("./info/todo.json", "utf8"));
 let userCommandList = JSON.parse(fs.readFileSync("./info/userCommands.json", "utf8"));
 
@@ -403,7 +404,7 @@ async function userCommands(message, args) {
 		
 		//first check if this user has an entry already
 		let exists = false;
-		for (let i = 0; i < challengeList.length; i++) {
+		for (let i = 0; i < 1.length; i++) {
 			if (challengeList[i].ID == message.author.toString()) {
 				challengeList[i].entry = args[1].toString();
 				exists = true;
@@ -426,6 +427,37 @@ async function userCommands(message, args) {
 			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 		}
 	}*/
+	// Unfortunately this is not anonymous in its current, quick implementation. We store user IDs, but not usernames/tags,
+	// so that we can ensure votes aren't stored twice, and so an admin *who hasn't entered* can ensure votes are from
+	// real server members, but in the future this should be hashed.
+	else if (args[0] == "!vote") {
+		if (args.length != 2) {
+			return await message.channel.send("USAGE: `!vote ENTRY-NUMBER`");
+		} 
+		let acceptedOrUpdated = "";
+		//first check if this user has voted already
+		let exists = false;
+		for (let i = 0; i < voteList.length; i++) {
+			if (voteList[i].userID == message.author.toString()) {
+				voteList[i].vote = args[1].toString();
+				exists = true;
+			}
+		}
+		if (exists) {
+			fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
+			return await message.channel.send("Your vote has been updated!");
+		}
+		else { 
+			let toAdd = {
+				//"user": message.author.username,
+				"userID": message.author.toString(),
+				"vote": args[1].toString(),
+			}
+			voteList.push(toAdd);
+			fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
+			return await message.channel.send("Your vote has been accepted!");
+		}
+	}
 	else if (args[0] == "!help") {
 		let userHelpString = "`!contribute` - Allows you to submit a single post to #resources\n";
 		//userHelpString += "`!challenge` - Submit or update your entry to the current challenge\n";
