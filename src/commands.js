@@ -395,7 +395,7 @@ async function modCommands(message, args) {
 		} 
 		let total = 0;
 		for (let i = 0; i < voteList.length; i++) {
-			if (voteList[i].vote == arg[1]){
+			if (voteList[i].vote == args[1]){
 				total++;
 			}
 		}
