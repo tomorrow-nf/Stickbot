@@ -44,6 +44,8 @@ const DiscordBot = new Discord.Client({
 
 //Executed upon a message being sent to any channel the bot can look at
 DiscordBot.on('message', async message => {
+	if (message.author.bot) return;
+	
 	let args = message.content.toLowerCase().split(" ");
 
 	//Mod specific handlers:
