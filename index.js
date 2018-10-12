@@ -113,12 +113,13 @@ DiscordBot.on('guildMemberAdd', async(member) => {
 	if (member.displayName.includes("discord.gg")){
 		console.log("Kicking a spambot: " + member.displayName);
 		await member.kick("Spambot eliminated");
-	}
-	if (member.id === "118603282670288898" ) {
-		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw. Welcome " + "<@!" + member.id + ">" + "!" + rulesAndRoles);
-	}
-	else {
-		await introductionsChannel.send(intros[ran] + "<@!" + member.id + ">" + "!" + rulesAndRoles);
+	} else {
+		if (member.id === "118603282670288898" ) {
+			await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw. Welcome " + "<@!" + member.id + ">" + "!" + rulesAndRoles);
+		}
+		else {
+			await introductionsChannel.send(intros[ran] + "<@!" + member.id + ">" + "!" + rulesAndRoles);
+		}
 	}
 });
 
