@@ -110,8 +110,12 @@ DiscordBot.on('guildMemberAdd', async(member) => {
 	let introductionsChannel = DiscordBot.channels.get(misc.ids.introductions);
 	var rulesAndRoles = " Please read through "+ DiscordBot.channels.get(misc.ids.rules) + ", set a role in " + DiscordBot.channels.get(misc.ids.roleassignment) + ", and have a great time here!";
 	var ran = Math.floor(Math.random() * intros.length);
+	if (member.displayName.contains("discord.gg"){
+		member.kick;
+		console.log("Kicked a spambot: " + member.displayName);
+	}
 	if (member.id === "118603282670288898" ) {
-		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw." + rulesAndRoles);
+		await introductionsChannel.send("Making notches better than Mike Haze! It's- oh, well this is awkward... Ughhh, hi Mike, you make very nice notches btw. Welcome " + "<@!" + member.id + ">" + "!" + rulesAndRoles);
 	}
 	else {
 		await introductionsChannel.send(intros[ran] + "<@!" + member.id + ">" + "!" + rulesAndRoles);
