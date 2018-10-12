@@ -110,7 +110,7 @@ DiscordBot.on('guildMemberAdd', async(member) => {
 	let introductionsChannel = DiscordBot.channels.get(misc.ids.introductions);
 	var rulesAndRoles = " Please read through "+ DiscordBot.channels.get(misc.ids.rules) + ", set a role in " + DiscordBot.channels.get(misc.ids.roleassignment) + ", and have a great time here!";
 	var ran = Math.floor(Math.random() * intros.length);
-	if (member.displayName.contains("discord.gg")){
+	if (member.displayName.includes("discord.gg")){
 		member.kick;
 		console.log("Kicked a spambot: " + member.displayName);
 	}
