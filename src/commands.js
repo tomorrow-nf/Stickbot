@@ -407,7 +407,10 @@ async function userCommands(message, args) {
 	if (args[0] == "!contribute") {
 		let guild = message.member.guild;
 		await guild.member(message.author).addRole(guild.roles.find("name", "Contributor"));
-		return await message.channel.send("<@!" + message.author.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
+		await message.channel.send("<@!" + message.author.id + ">, you are now a Contributor. You can post **ONE** message to " + message.guild.channels.find("name", "resources") + ". Thank you for your contribution!");
+		return setTimeout(() => {
+			guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
+		}, 300000) // 5 minutes
 	}
 	/*else if (args[0] == "!challenge") {
 		if (args.length != 2) {
