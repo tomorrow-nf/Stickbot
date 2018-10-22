@@ -28,7 +28,7 @@ function emojiToRole(emojiName, messageID) {
 	return ret;
 }
 
-function cleanupRoles(guild, desiredRole, user){
+async function cleanupRoles(guild, desiredRole, user){
 	var matchingRole;
 	if (desiredRole.includes("(Secondary)")){
 		matchingRole = desiredRole.replace(' (Secondary)', ''); 
@@ -47,14 +47,14 @@ function cleanupRoles(guild, desiredRole, user){
 		// If someone has both a Primary and Secondary role for the same skill, fix that
 		var role = guild.roles.find(role => role.name === matchingRole);
 		console.log("Removing matching role " + role.name + " for user " + user);
-		guild.member(user).removeRole(role);
+		await guild.member(user).removeRole(role);
 	}
 	
 	// Remove all Primary roles before adding the new one
 	for (var role in emojiRoleDict) {
 		if (!desiredRole.includes("(Secondary)")){
 			var removeThisRole = guild.roles.find(removeThisRole => removeThisRole.name === emojiRoleDict[role]);
-			guild.member(user).removeRole(removeThisRole);
+			await guild.member(user).removeRole(removeThisRole);
 		}
     }
 }
