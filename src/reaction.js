@@ -28,6 +28,37 @@ function emojiToRole(emojiName, messageID) {
 	return ret;
 }
 
+function cleanupRoles(guild, desiredRole, user){
+	var matchingRole;
+	if (desiredRole.includes("(Secondary)")){
+		matchingRole = desiredRole.replace(' (Secondary)', ''); 
+	} else {
+		matchingRole = desiredRole + " (Secondary)";
+	}
+
+	let hasMatchingRole = false;
+	try {
+		hasMatchingRole = misc.roleInRoles(matchingRole, guild.member(user).roles.array());
+	} catch (e) {
+		;
+	}
+
+	if(hasMatchingRole){
+		// If someone has both a Primary and Secondary role for the same skill, fix that
+		var role = guild.roles.find(role => role.name === matchingRole);
+		console.log("Removing matching role " + role.name + " for user " + user);
+		guild.member(user).removeRole(role);
+	}
+	
+	// Remove all Primary roles before adding the new one
+	for (var role in emojiRoleDict) {
+		if (!desiredRole.includes("(Secondary)")){
+			var removeThisRole = guild.roles.find(removeThisRole => removeThisRole.name === emojiRoleDict[role]);
+			guild.member(user).removeRole(removeThisRole);
+		}
+    }
+}
+
 async function handleReactionAdd(messageReaction, user, DiscordBot) {
 	if (messageReaction.message.channel.name == "role-assignment") { 
 		console.log(messageReaction.emoji.name);
@@ -42,23 +73,25 @@ async function handleReactionAdd(messageReaction, user, DiscordBot) {
 			await messageReaction.remove(user); //remove the cgccWhite emoji
 			removeReacts = true;
 		} else {
-			console.log("Received something other than cgccWhite");
 			let guild = messageReaction.message.member.guild;
 			let hasRole = false;
+			let desiredRole = emojiToRole(messageReaction.emoji.name, messageReaction.message.id);
 			try {
-				hasRole = misc.roleInRoles(emojiToRole(messageReaction.emoji.name, messageReaction.message.id), guild.member(user).roles.array());
+				hasRole = misc.roleInRoles(desiredRole, guild.member(user).roles.array());
 			} catch (e) {
 				;
 			}
 
 			if (!hasRole) {
-				console.log("Add role " + emojiToRole(messageReaction.emoji.name, messageReaction.message.id));
-				await guild.member(user).addRole(guild.roles.find("name", emojiToRole(messageReaction.emoji.name, messageReaction.message.id)));
+				console.log("Add role " + desiredRole + " for user " + user);
+				cleanupRoles(guild, desiredRole, user);
+				var addingThisRole = guild.roles.find(addingThisRole => addingThisRole.name === desiredRole);
+				await guild.member(user).addRole(addingThisRole);
 			} else {
-				console.log("Remove role " + emojiToRole(messageReaction.emoji.name));
-				await guild.member(user).removeRole(guild.roles.find("name", emojiToRole(messageReaction.emoji.name, messageReaction.message.id)));
+				console.log("Remove role " + desiredRole);
+				var removingThisRole = guild.roles.find(removingThisRole => removingThisRole.name === desiredRole);
+				await guild.member(user).removeRole(removingThisRole);
 			}
-
 			if (removeReacts)
 				await messageReaction.remove(user); //as per desired behavior, remove their reaction after they add it
 		}

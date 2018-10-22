@@ -133,10 +133,14 @@ async function galleryImagesOnly(message) {
 }
 
 async function removeContributor(message) {
-	let guild = message.member.guild;
-	if (message.channel.name == "resources") { 
-		console.log("New message posted in resources");
-		await guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
+	try {
+		let guild = message.member.guild;
+		if (message.channel.name == "resources") { 
+			console.log("New message posted in resources");
+			await guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
+		}
+	} catch (e){
+		// Do nothing
 	}
 }
 
