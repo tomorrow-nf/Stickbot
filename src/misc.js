@@ -140,7 +140,7 @@ async function removeContributor(message) {
 			await guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
 		}
 	} catch (e){
-		// Do nothing
+		;// Do nothing
 	}
 }
 
