@@ -99,6 +99,12 @@ function configure() {
 		fs.writeFileSync("./info/votes.json", "[]", "utf8");
 		console.log("./info/votes.json created. This contains votes to the current CGCC challenge.");
 	}
+	
+	if (!fs.existsSync("./info/spam.json")) {
+		didConfigure = true;
+		fs.writeFileSync("./info/spam.json", "[]", "utf8");
+		console.log("./info/spam.json created.");
+	}
 
 	if (didConfigure) {
 		console.log("Configuration complete.");
