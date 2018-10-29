@@ -117,7 +117,7 @@ DiscordBot.on('guildMemberAdd', async(member) => {
 	//Handle spambots and send intro messages
 	var spam = false;
 	for (let i = 0; i < spambots.length && !spam; i++){
-		if (member.displayName.includes(spambots[i])){
+		if (member.displayName.toLowerCase().includes(spambots[i])){
 			console.log("Kicking a spambot: " + member.displayName);
 			member.send("Spambots are not welcome in this server. If you believe this was in error, remove the URL or spam phrase from your username before rejoining.");
 			spam = true;
