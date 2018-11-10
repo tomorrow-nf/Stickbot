@@ -479,7 +479,7 @@ async function userCommands(message, args) {
 																		   "\n`!challenge help`: Display this message");
 		} 
 		else if (args[1] == "submit"){
-			if (args.length != 4) {
+			if (args.length < 4) {
 				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
 			} 
 			if (currentDate < submissionStart){
