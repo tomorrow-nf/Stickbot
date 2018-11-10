@@ -401,7 +401,7 @@ async function modCommands(message, args) {
 				if (voteList[i].vote == (n+1)){
 					totalVotes++;
 				}
-				output += "Total votes for entry " + (n+1) + ": " + totalVotes + "\n";
+				output += "Total votes for entry " + (n+1) + ": `" + totalVotes + "`\n";
 			}
 		}
 		return await message.author.send(output);
