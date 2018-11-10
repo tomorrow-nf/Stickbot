@@ -466,22 +466,22 @@ async function userCommands(message, args) {
 		var voteEnd = new Date('November 14, 2018 12:00:00');
 
 		if (args[1] == "help" || args.length < 2 || args.length > 4 || 
-			(args[1] != "submit" && args[1] != "vote" && args[1] != "view") {
+			(args[1] != "submit" && args[1] != "vote" && args[1] != "view")) {
 			return await message.channel.send("CustomGCC Challenge commands:\n`!challenge submit LINK-TO-ENTRY DESCRIPTION`: Submit your entry with a link and description" +
 																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
 																		   "\n`!challenge help`: Display this message");
 		} 
 		else if (args[1] == "submit"){
+			if (args.length != 4) {
+				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
+			} 
 			if (currentDate < submissionStart){
 				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart);
 			}
 			if (currentDate > submissionDeadline){
 				return await message.channel.send("Challenge submissions are have closed, sorry!");
 			}
-			if (args.length != 4) {
-				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
-			} 
 			
 			//first check if this user has an entry already
 			let exists = false;
@@ -511,6 +511,9 @@ async function userCommands(message, args) {
 			}
 		}
 		else if (args[1] == "vote") {
+			if (args.length != 3) {
+				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
+			} 
 			if (currentDate < voteStart){
 				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart);
 			}
@@ -520,9 +523,6 @@ async function userCommands(message, args) {
 			if (new Date(message.member.joined_at) > voteStart){
 				return await message.channel.send("Sorry, to prevent tampering, only previously active server members are eligible to vote in this challenge.");
 			}
-			if (args.length != 3) {
-				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
-			} 
 			//first check if this user has voted already. Hash user IDs to help prevent tampering.
 			let exists = false;
 			for (let i = 0; i < voteList.length; i++) {
