@@ -296,7 +296,7 @@ async function modCommands(message, args) {
 		} else {
 			return await message.channel.send("Example usage: `!emotelist zhuW zhuW2 puffWhat`.");
 		}
-	} else if (args[0] == "!setcommand") {
+	} else if (args[0] == "!setcommand" || args[0] == "!addcommand") {
 		if (args.length < 3) {
 			return await message.channel.send("USAGE: `!setcommand COMMAND_NAME text` -- For example the command `!setcommand controllers Here's some useful controller info!` would create a command `!controllers` that would print `Here's some useful controller info!`.");
 		} else {
@@ -534,13 +534,13 @@ async function userCommands(message, args) {
 			let exists = false;
 			for (let i = 0; i < voteList.length; i++) {
 				if (voteList[i].userID == hashCode(message.author.toString())) {
-					voteList[i].vote = (args[1] + 1).toString();
+					voteList[i].vote = (args[2] + 1).toString();
 					exists = true;
 				}
 			}
 			// Check if the vote is valid, and if so, that the submission voted for actually exists
 			var voteInt = parseInt(args[2].toString());
-			if (isNaN(voteInt) || voteInt > challengeList.length || voteInt < 0){
+			if (isNaN(voteInt) || voteInt > challengeList.length || voteInt <= 0){
 				return await message.channel.send("Please vote for a valid entry.");
 			}
 
@@ -564,7 +564,7 @@ async function userCommands(message, args) {
 			}
 			let allSubmissions = "Here are all the entries to the current CustomGCC Challenge:\n========================\n";
 			for (let i = 0; i < challengeList.length; i++) {
-				allSubmissions += "'Entry " + i+1 + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
+				allSubmissions += "'Entry " + (i+1) + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
 			}
 			await message.channel.send("Please check your private messages to view the full challenge list! (You must have messages from server members enabled. If not, please check the latest announcements for the list)");
 			return await message.author.send(allSubmissions);
