@@ -394,14 +394,14 @@ async function modCommands(message, args) {
 		return await message.channel.send(s);
 	}
 	else if (args[0] == "!getvotes") {
-		var output;
+		let output = "CHALLENGE VOTES:\n***************\n";
 		for (let n = 0; n < challengeList.length; n++){
 			let total = 0;
 			for (let i = 0; i < voteList.length; i++){
 				if (voteList[i].vote == n){
 					total++;
 				}
-				output += "Total votes for entry " + n + ": " + total;
+				output += "Total votes for entry " + n+1 + ": " + total;
 			}
 		}
 		return await message.author.send(output);
@@ -529,11 +529,12 @@ async function userCommands(message, args) {
 			if (new Date(message.member.joined_at) > voteStart){
 				return await message.channel.send("Sorry, to prevent tampering, only previously active server members are eligible to vote in this challenge.");
 			}
-			//first check if this user has voted already. Hash user IDs to help prevent tampering.
+			// First check if this user has voted already. Hash user IDs to help prevent tampering.
+			// Add 1 to the vote, we don't want to start at 0
 			let exists = false;
 			for (let i = 0; i < voteList.length; i++) {
 				if (voteList[i].userID == hashCode(message.author.toString())) {
-					voteList[i].vote = args[1].toString();
+					voteList[i].vote = (args[1] + 1).toString();
 					exists = true;
 				}
 			}
