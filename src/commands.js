@@ -500,7 +500,7 @@ async function userCommands(message, args) {
 				}
 			}
 			if (exists) {
-				console.log("Updating entry for user : " + message.author.username + "to " + args[2].toString());
+				console.log("Updating entry for user : " + message.author.username);
 				fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 				return await message.channel.send("Your challenge entry has been updated! Good luck!");
 			}
@@ -512,7 +512,7 @@ async function userCommands(message, args) {
 					"descr": args[3].toString()
 				}
 				challengeList.push(toAdd);
-				console.log("Submitting challenge entry for user : " + message.author.username + " - " + args[2].toString());
+				console.log("Submitting challenge entry for user : " + message.author.username);
 				fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
 				return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 			}
@@ -564,7 +564,7 @@ async function userCommands(message, args) {
 			}
 			let allSubmissions = "Here are all the entries to the current CustomGCC Challenge:\n========================\n";
 			for (let i = 0; i < challengeList.length; i++) {
-				allSubmission += "'Entry " + i + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
+				allSubmissions += "'Entry " + i + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
 			}
 			await message.channel.send("Please check your private messages to view the full challenge list! (You must have messages from server members enabled. If not, please check the latest announcements for the list)");
 			return await message.author.send(allSubmissions);
