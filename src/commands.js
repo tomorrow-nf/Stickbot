@@ -487,7 +487,7 @@ async function userCommands(message, args) {
 			for (let i = 0; i < challengeList.length; i++) {
 				if (challengeList[i].ID == message.author.toString()) {
 					challengeList[i].entry = args[2].toString();
-					challengeList[i].descr = args[3].toString();
+					challengeList[i].descr = message.content.substring(args[0].length + args[1].length + args[2].length + 2)
 					exists = true;
 				}
 			}
