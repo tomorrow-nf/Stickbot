@@ -477,7 +477,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
 			} 
 			if (currentDate < submissionStart){
-				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart.toLocaleTimeString('en-US'));
+				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart.toLocaleString() + " EDT");
 			}
 			if (currentDate > submissionDeadline){
 				return await message.channel.send("Challenge submissions are have closed, sorry!");
@@ -515,7 +515,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
 			} 
 			if (currentDate < voteStart){
-				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart.toLocaleString());
+				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart.toLocaleString() + " EDT");
 			}
 			if (currentDate > voteEnd){
 				return await message.channel.send("Challenge voting has closed, sorry! Check back for the next challenge");
