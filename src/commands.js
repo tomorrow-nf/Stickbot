@@ -487,7 +487,7 @@ async function userCommands(message, args) {
 			
 			//first check if this user has an entry already
 			let exists = false;
-			for (let i = 0; i < 1.length; i++) {
+			for (let i = 0; i < challengeList.length; i++) {
 				if (challengeList[i].ID == message.author.toString()) {
 					challengeList[i].entry = args[2].toString();
 					challengeList[i].descr = args[3].toString();
