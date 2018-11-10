@@ -407,10 +407,10 @@ async function modCommands(message, args) {
 		return await message.author.send(output);
 	}
 	else if (args[0] == "!resetchallenge") {
-		challengeList.splice(0, challengeList.length);
-		fs.writeFileSync('./info/spam.json', JSON.stringify(challengeList), 'utf8');
-		voteList.splice(0, voteList.length);
-		fs.writeFileSync('./info/spam.json', JSON.stringify(voteList), 'utf8');
+		fs.unlink('./info/challenge.json');
+		fs.unlink('./info/votes.json');
+		fs.writeFileSync('./info/challenge.json', JSON.stringify(challengeList), 'utf8');
+		fs.writeFileSync('./info/votes.json', JSON.stringify(voteList), 'utf8');
 		return await message.channel.send("Challenge submissions and votes have been reset");
 	}
 	else if (args[0] == "!spambots") {
@@ -564,7 +564,7 @@ async function userCommands(message, args) {
 			}
 			let allSubmissions = "Here are all the entries to the current CustomGCC Challenge:\n========================\n";
 			for (let i = 0; i < challengeList.length; i++) {
-				allSubmissions += "'Entry " + i + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
+				allSubmissions += "'Entry " + i+1 + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
 			}
 			await message.channel.send("Please check your private messages to view the full challenge list! (You must have messages from server members enabled. If not, please check the latest announcements for the list)");
 			return await message.author.send(allSubmissions);
