@@ -460,7 +460,7 @@ async function userCommands(message, args) {
 		// TODO: Mod command to provide and set these dates
 		var currentDate = new Date();
 		var submissionStart = new Date('November 10, 2018 12:00 GMT-04:00');
-		var submissionDeadline = new Date('November 11, 2018 23:59 GMT-04:00');
+		var submissionDeadline = new Date('November 11, 2018 03:59 GMT-04:00');
 		var voteStart = new Date('November 12, 2018 04:00 GMT-04:00');
 		var voteEnd = new Date('November 14, 2018 04:00 GMT-04:00');
 
@@ -469,7 +469,11 @@ async function userCommands(message, args) {
 			return await message.channel.send("CustomGCC Challenge commands:\n`!challenge submit LINK-TO-ENTRY DESCRIPTION`: Submit your entry with a link and description" +
 																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
-																		   "\n`!challenge help`: Display this message");
+																		   "\n`!challenge help`: Display this message\n" +
+											 "\n Challenge submissions open: " + submissionStart.toLocaleString() + " EDT" +
+											 "\n Submission deadline: " + submissionDeadline.toLocaleString() + " EDT" +
+											 "\n Voting begins: " + voteStart.toLocaleString() + " EDT" +
+											 "\n Voting deadline: " + voteEnd.toLocaleString() + " EDT");
 		} 
 		else if (args[1] == "submit"){
 			if (args.length < 4) {
