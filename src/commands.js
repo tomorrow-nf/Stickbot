@@ -12,6 +12,7 @@ const blacklist = require("./blacklist.js");
 
 //let challengeList = JSON.parse(fs.readFileSync("./info/challenge.json", "utf8"));
 let voteList = JSON.parse(fs.readFileSync("./info/votes.json", "utf8"));
+let challengeList = JSON.parse(fs.readFileSync("./info/challenge.json", "utf8"));
 let todoList = JSON.parse(fs.readFileSync("./info/todo.json", "utf8"));
 let userCommandList = JSON.parse(fs.readFileSync("./info/userCommands.json", "utf8"));
 
@@ -396,16 +397,24 @@ async function modCommands(message, args) {
 		return await message.channel.send(s);
 	}
 	else if (args[0] == "!getvotes") {
-		if (args.length != 2) {
-			return await message.channel.send("USAGE: `!getvotes ENTRY-NUMBER`");
-		} 
-		let total = 0;
-		for (let i = 0; i < voteList.length; i++) {
-			if (voteList[i].vote == args[1]){
-				total++;
+		var output;
+		for (let n = 0; n < challengeList.length; n++){
+			let total = 0;
+			for (let i = 0,; i < voteList.length; i++) {
+				if (voteList[i].vote == n){
+					total++;
+				}
+				output += "Total votes for entry " + n + ": " + total;
 			}
 		}
-		return await message.channel.send("Total votes for entry " + args[1] + ": " + total);
+		return await message.author.send(output);
+	}
+	else if (args[0] == "!resetchallenge") {
+		challengeList.splice(0, challengeList.length);
+		fs.writeFileSync('./info/spam.json', JSON.stringify(challengeList), 'utf8');
+		voteList.splice(0, voteList.length);
+		fs.writeFileSync('./info/spam.json', JSON.stringify(voteList), 'utf8');
+		return await message.channel.send("Challenge submissions and votes have been reset");
 	}
 	else if (args[0] == "!spambots") {
 		if (args.length == 1) {
@@ -450,69 +459,116 @@ async function userCommands(message, args) {
 			guild.member(message.author).removeRole(guild.roles.find("name", "Contributor"));
 		}, 300000) // 5 minutes
 	}
-	/*else if (args[0] == "!challenge") {
-		if (args.length != 2) {
-			return await message.channel.send("USAGE: `!challenge LINK-TO-CONTEST-ENTRY`");
+	// CHALLENGE COMMANDS
+	else if (args[0] == "!challenge") {
+		// TODO: Mod command to provide and set these dates
+		var currentDate = new Date();
+		var submissionStart = new Date('November 10, 2018 12:00:00');
+		var submissionDeadline = new Date('November 11, 2018 23:59:59');
+		var voteStart = new Date('November 12, 2018 12:00:00');
+		var voteEnd = new Date('November 14, 2018 12:00:00');
+
+		if (args[1] == "help" || args.length < 2 || args.length > 4) {
+			return await message.channel.send("CustomGCC Challenge commands:\n`!challenge submit LINK-TO-ENTRY DESCRIPTION`: Submit your entry with a link and description" +
+																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
+																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
+																		   "\n`!challenge help`: Display this message");
 		} 
-		
-		//first check if this user has an entry already
-		let exists = false;
-		for (let i = 0; i < 1.length; i++) {
-			if (challengeList[i].ID == message.author.toString()) {
-				challengeList[i].entry = args[1].toString();
-				exists = true;
+		else if (args[1] == "submit"){
+			if (currentDate < submissionStart){
+				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart);
+			}
+			if (currentDate > submissionDeadline){
+				return await message.channel.send("Challenge submissions are have closed, sorry!");
+			}
+			if (args.length != 4) {
+				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
+			} 
+			
+			//first check if this user has an entry already
+			let exists = false;
+			for (let i = 0; i < 1.length; i++) {
+				if (challengeList[i].ID == message.author.toString()) {
+					challengeList[i].entry = args[2].toString();
+					challengeList[i].descr = args[3].toString();
+					exists = true;
+				}
+			}
+			if (exists) {
+				console.log("Updating entry for user : " + message.author.username + "to " + args[2].toString());
+				fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
+				return await message.channel.send("Your challenge entry has been updated! Good luck!");
+			}
+			else { 
+				let toAdd = {
+					"user": message.author.username,
+					"ID": message.author.toString(),
+					"entry": args[2].toString(),
+					"descr": args[3].toString();
+				}
+				challengeList.push(toAdd);
+				console.log("Submitting challenge entry for user : " + message.author.username + " - " + args[2].toString());
+				fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
+				return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
 			}
 		}
-		if (exists) {
-			console.log("Updating entry for user : " + message.author.username + "to " + args[1].toString());
-			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
-			return await message.channel.send("Your challenge entry has been updated! Good luck!");
-		}
-		else { 
-			let toAdd = {
-				"user": message.author.username,
-				"ID": message.author.toString(),
-				"entry": args[1].toString(),
+		else if (args[1] == "vote") {
+			if (currentDate < voteStart){
+				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart);
 			}
-			challengeList.push(toAdd);
-			console.log("Submitting entry for user : " + message.author.username + " - " + args[1].toString());
-			fs.writeFileSync("./info/challenge.json", JSON.stringify(challengeList, null, "\t"), "utf8");
-			return await message.channel.send("Thank you for entering the CustomGCC Challenge. Good luck!");
-		}
-	}*/
-	// Unfortunately this is not anonymous in its current, quick implementation. We store user IDs, but not usernames/tags,
-	// so that we can ensure votes aren't stored twice, and so an admin *who hasn't entered* can ensure votes are from
-	// real server members, but in the future this should be hashed.
-	else if (args[0] == "!vote") {
-		if (args.length != 2) {
-			return await message.channel.send("USAGE: `!vote ENTRY-NUMBER`");
-		} 
-		//first check if this user has voted already
-		let exists = false;
-		for (let i = 0; i < voteList.length; i++) {
-			if (voteList[i].userID == message.author.toString()) {
-				voteList[i].vote = args[1].toString();
-				exists = true;
+			if (currentDate > voteEnd){
+				return await message.channel.send("Challenge voting has closed, sorry! Check back for the next challenge");
+			}
+			if (new Date(message.member.joined_at) > voteStart){
+				return await message.channel.send("Sorry, to prevent tampering, only previously active server members are eligible to vote in this challenge.");
+			}
+			if (args.length != 3) {
+				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
+			} 
+			//first check if this user has voted already. Hash user IDs to help prevent tampering.
+			let exists = false;
+			for (let i = 0; i < voteList.length; i++) {
+				if (voteList[i].userID == hashCode(message.author.toString())) {
+					voteList[i].vote = args[1].toString();
+					exists = true;
+				}
+			}
+			// Check if the vote is valid, and if so, that the submission voted for actually exists
+			var voteInt = parseInt(args[2].toString());
+			if (isNaN(voteInt) || voteInt > challengeList.length || voteInt < 0){
+				return await message.channel.send("Please vote for a valid entry.");
+			}
+
+			if (exists) {
+				fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
+				return await message.channel.send("Your vote has been updated!");
+			}
+			else { 
+				let toAdd = {
+					"userID": hashCode(message.author.toString()),
+					"vote": args[2].toString(),
+				}
+				voteList.push(toAdd);
+				fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
+				return await message.channel.send("Your vote has been accepted!");
 			}
 		}
-		if (exists) {
-			fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
-			return await message.channel.send("Your vote has been updated!");
-		}
-		else { 
-			let toAdd = {
-				//"user": message.author.username,
-				"userID": message.author.toString(),
-				"vote": args[1].toString(),
+		else if (args[1] == "view"){
+			if (currentDate < voteStart){
+				return await message.channel.send("Sorry, challenge entries are not yet available to view. Check back soon!");
 			}
-			voteList.push(toAdd);
-			fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
-			return await message.channel.send("Your vote has been accepted!");
+			let allSubmissions = "Here are all the entries to the current CustomGCC Challenge:\n========================\n";
+			for (let i = 0; i < challengeList.length; i++) {
+				allSubmission += "'Entry " + i + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
+			}
+			await message.channel.send("Please check your private messages to view the full challenge list! (You must have messages from server members enabled. If not, please check the latest announcements for the list)");
+			return await message.author.send(allSubmissions);
 		}
 	}
+	// End of CHALLENGE commands
 	else if (args[0] == "!help") {
 		let userHelpString = "`!contribute` - Allows you to submit a single post to #resources\n";
-		//userHelpString += "`!challenge` - Submit or update your entry to the current challenge\n";
+		userHelpString += "`!challenge` - Use `!challenge help` to view Challenge commands\n";
 		for (let i = 0; i < userCommandList.length; i++) {
 			if (!userCommandList[i].hide){
 				userHelpString += "`" + userCommandList[i].command + "` -  " + userCommandList[i].description + "\n";
@@ -532,6 +588,12 @@ async function userCommands(message, args) {
 			}
 		}
 	}
+}
+
+function hashCode(s) {
+    for(var i = 0, h = 0; i < s.length; i++)
+        h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+    return h;
 }
 
 module.exports.modCommands = modCommands;
