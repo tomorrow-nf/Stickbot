@@ -43,8 +43,6 @@ const DiscordBot = new Discord.Client({
 	messageCacheMaxSize: updateCacheEvery + 50
 });
 
-
-
 //Executed upon a message being sent to any channel the bot can look at
 DiscordBot.on('message', async message => {
 	if (message.author.bot) return;
@@ -88,7 +86,7 @@ DiscordBot.on('message', async message => {
 
 	let reminderToSend = misc.checkReminders();
 	if (reminderToSend) {
-		let reminderChannel = DiscordBot.guilds.get(misc.ids.server).channels.get(misc.ids.bot-log);
+		let reminderChannel = mainGuild.channels.get(misc.ids.botlog);
 		await reminderChannel.send(reminderToSend.message);
 		misc.removeReminder(reminderToSend.id);
 	}
