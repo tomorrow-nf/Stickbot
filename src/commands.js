@@ -194,13 +194,8 @@ async function modCommands(message, args) {
 		return await mChannel.send(quantity_messages.toString() + " messages deleted from " + args[1] + ".");
 	} else if (args[0] == "!modhelp") {
 		let s = "Here are some commands I can do for Moderators:\n\n";
-		if (args.length == 1)
-			s += helpString[0];
-		else
-			s += helpString[parseInt(args[1])];
-		s += "`!help` - Commands for all users.\n";
-		s += "Try `!modhelp 0` or `!modhelp 1` for more commands.";
-		await message.channel.send(s);
+		await message.channel.send(s + helpString[0]);
+		await message.channel.send(s + helpString[1] + "`!help` - Commands for all users.\n");
 	} else if (args[0] == "!logfile") {
 		await message.channel.send({
 			files: [{
