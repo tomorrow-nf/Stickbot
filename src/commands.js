@@ -515,7 +515,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
 			} 
 			if (currentDate < voteStart){
-				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart.toLocaleTimeString('en-US'));
+				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart.getDate() + voteStart.toLocaleTimeString('en-US') + "ET");
 			}
 			if (currentDate > voteEnd){
 				return await message.channel.send("Challenge voting has closed, sorry! Check back for the next challenge");
