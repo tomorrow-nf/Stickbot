@@ -34,7 +34,7 @@ helpString[0] += "`!kill` - End this bot instance. Bot should automatically rest
 helpString[0] += "`!refresh` - Remove all reacts not by the bot in the roles channel.\n";
 helpString[0] += "`!say CHANNEL MESSAGE` - Send any message to any channel.\n";
 helpString[0] += "`!purge CHANNEL NUMBER` - Delete NUMBER messages from CHANNEL.\n";
-helpString[0] += "`!remindme DAYS MESSAGE` - Send an automatic message to the bot-spam channel after `DAYS` days have passed.\n";
+helpString[0] += "`!remindme DAYS MESSAGE` - Send an automatic message to the bot-log channel after `DAYS` days have passed.\n";
 
 helpString[1] += "`!emotelist EMOTES` - The list of emotes to add to a message when reacting with :cgccWhite:.\n";
 helpString[1] += "`!todo` - Display the todo list.\n";
@@ -48,7 +48,8 @@ helpString[1] += "`!blacklist warnings ID|Tag` - List all words that were flagge
 helpString[1] += "`!log` - Print a log of all users with recorded blacklist warnings or infractions.\n";
 helpString[1] += "`!logfile` - Send a .csv file containing users and the quantity of violations/warnings.\n";
 helpString[1] += "`!spambots add word' - Add a string to the new user spambot filter\n";
-helpString[1] += "`!spambots remove word' - Remove a string from the spambot filter\n";
+helpString[1] += "`!resetchallenge' - Clears the challenge and voting lists\n";
+helpString[1] += "`!getvotes NUMBER' - Gets all current challenge votes\n";
 
 
 async function modCommands(message, args) {
