@@ -407,11 +407,10 @@ async function modCommands(message, args) {
 		return await message.author.send(output);
 	}
 	else if (args[0] == "!resetchallenge") {
-		fs.unlink('./info/challenge.json');
-		fs.unlink('./info/votes.json');
+		challengeList.splice(0, challengeList.length);
+		voteList.splice(0, voteList.length);
 		fs.writeFileSync('./info/challenge.json', JSON.stringify(challengeList), 'utf8');
-		fs.writeFileSync('./info/votes.json', JSON.stringify(voteList), 'utf8');
-		return await message.channel.send("Challenge submissions and votes have been reset");
+		fs.writeFileSync('./info/votes.json', JSON.stringify(voteList), 'utf8');		return await message.channel.send("Challenge submissions and votes have been reset");
 	}
 	else if (args[0] == "!spambots") {
 		if (args.length == 1) {
