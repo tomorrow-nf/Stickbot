@@ -86,7 +86,7 @@ DiscordBot.on('message', async message => {
 
 	let reminderToSend = misc.checkReminders();
 	if (reminderToSend) {
-		let reminderChannel = mainGuild.channels.get(misc.ids.botlog);
+		let reminderChannel = misc.mainGuild.channels.get(misc.ids.botlog);
 		await reminderChannel.send(reminderToSend.message);
 		misc.removeReminder(reminderToSend.id);
 	}
