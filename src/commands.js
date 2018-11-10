@@ -47,10 +47,10 @@ helpString[1] += "`!blacklist violations ID|Tag` - List all words that were remo
 helpString[1] += "`!blacklist warnings ID|Tag` - List all words that were flagged as warnings from a user with that ID or Tag.\n";
 helpString[1] += "`!log` - Print a log of all users with recorded blacklist warnings or infractions.\n";
 helpString[1] += "`!logfile` - Send a .csv file containing users and the quantity of violations/warnings.\n";
-helpString[1] += "`!spambots add phrase' - Add a string to the new user spambot filter\n";
-helpString[1] += "`!spambots remove phrase' - Add a string to the new user spambot filter\n";
-helpString[1] += "`!resetchallenge' - Clears the challenge and voting lists\n";
-helpString[1] += "`!getvotes' - Gets all current challenge votes\n";
+helpString[1] += "`!spambots add phrase` - Add a string to the new user spambot filter.\n";
+helpString[1] += "`!spambots remove phrase` - Add a string to the new user spambot filter.\n";
+helpString[1] += "`!resetchallenge` - Clears the challenge and voting lists.\n";
+helpString[1] += "`!getvotes` - Gets all current challenge votes.\n";
 
 
 async function modCommands(message, args) {
