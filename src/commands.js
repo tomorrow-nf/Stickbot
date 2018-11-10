@@ -465,7 +465,8 @@ async function userCommands(message, args) {
 		var voteStart = new Date('November 12, 2018 12:00:00');
 		var voteEnd = new Date('November 14, 2018 12:00:00');
 
-		if (args[1] == "help" || args.length < 2 || args.length > 4) {
+		if (args[1] == "help" || args.length < 2 || args.length > 4 || 
+			(args[1] != "submit" && args[1] != "vote" && args[1] != "view") {
 			return await message.channel.send("CustomGCC Challenge commands:\n`!challenge submit LINK-TO-ENTRY DESCRIPTION`: Submit your entry with a link and description" +
 																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
