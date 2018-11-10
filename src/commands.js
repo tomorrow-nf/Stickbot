@@ -515,7 +515,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
 			} 
 			if (currentDate < voteStart){
-				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + convertUTCDateToLocalDate(new Date(voteStart)));
+				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart);
 			}
 			if (currentDate > voteEnd){
 				return await message.channel.send("Challenge voting has closed, sorry! Check back for the next challenge");
@@ -586,17 +586,6 @@ async function userCommands(message, args) {
 			}
 		}
 	}
-}
-
-function convertUTCDateToLocalDate(date) {
-    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
-
-    var offset = date.getTimezoneOffset() / 60;
-    var hours = date.getHours();
-
-    newDate.setHours(hours - offset);
-
-    return newDate;   
 }
 
 function hashCode(s) {
