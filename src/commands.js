@@ -400,7 +400,7 @@ async function modCommands(message, args) {
 		var output;
 		for (let n = 0; n < challengeList.length; n++){
 			let total = 0;
-			for (let i = 0,; i < voteList.length; i++) {
+			for (let i = 0; i < voteList.length; i++){
 				if (voteList[i].vote == n){
 					total++;
 				}
