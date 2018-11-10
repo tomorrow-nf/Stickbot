@@ -50,7 +50,7 @@ helpString[1] += "`!logfile` - Send a .csv file containing users and the quantit
 helpString[1] += "`!spambots add phrase' - Add a string to the new user spambot filter\n";
 helpString[1] += "`!spambots remove phrase' - Add a string to the new user spambot filter\n";
 helpString[1] += "`!resetchallenge' - Clears the challenge and voting lists\n";
-helpString[1] += "`!getvotes NUMBER' - Gets all current challenge votes\n";
+helpString[1] += "`!getvotes' - Gets all current challenge votes\n";
 
 
 async function modCommands(message, args) {
@@ -394,14 +394,14 @@ async function modCommands(message, args) {
 		return await message.channel.send(s);
 	}
 	else if (args[0] == "!getvotes") {
-		let output = "CHALLENGE VOTES:\n***************\n";
+		let output = "CHALLENGE VOTES:\n*============================*\n";
 		for (let n = 0; n < challengeList.length; n++){
-			let total = 0;
+			let totalVotes = 0;
 			for (let i = 0; i < voteList.length; i++){
-				if (voteList[i].vote == n){
-					total++;
+				if (voteList[i].vote == (n+1)){
+					totalVotes++;
 				}
-				output += "Total votes for entry " + n+1 + ": " + total;
+				output += "Total votes for entry " + (n+1) + ": " + totalVotes + "\n";
 			}
 		}
 		return await message.author.send(output);
