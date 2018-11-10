@@ -195,7 +195,7 @@ async function modCommands(message, args) {
 	} else if (args[0] == "!modhelp") {
 		let s = "Here are some commands I can do for Moderators:\n\n";
 		await message.channel.send(s + helpString[0]);
-		await message.channel.send(s + helpString[1] + "`!help` - Commands for all users.\n");
+		await message.channel.send(helpString[1] + "`!help` - Commands for all users.\n");
 	} else if (args[0] == "!logfile") {
 		await message.channel.send({
 			files: [{
