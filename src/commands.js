@@ -534,7 +534,7 @@ async function userCommands(message, args) {
 			let exists = false;
 			for (let i = 0; i < voteList.length; i++) {
 				if (voteList[i].userID == hashCode(message.author.toString())) {
-					voteList[i].vote = (args[2] + 1).toString();
+					voteList[i].vote = args[2].toString();
 					exists = true;
 				}
 			}
@@ -564,7 +564,7 @@ async function userCommands(message, args) {
 			}
 			let allSubmissions = "Here are all the entries to the current CustomGCC Challenge:\n========================\n";
 			for (let i = 0; i < challengeList.length; i++) {
-				allSubmissions += "'Entry " + (i+1) + ":\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
+				allSubmissions += "`Entry " + (i+1) + "`:\n" + challengeList[i].entry + "\n" + challengeList[i].descr + "\n========================\n";
 			}
 			await message.channel.send("Please check your private messages to view the full challenge list! (You must have messages from server members enabled. If not, please check the latest announcements for the list)");
 			return await message.author.send(allSubmissions);
