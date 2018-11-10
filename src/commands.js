@@ -504,7 +504,7 @@ async function userCommands(message, args) {
 					"user": message.author.username,
 					"ID": message.author.toString(),
 					"entry": args[2].toString(),
-					"descr": args[3].toString();
+					"descr": args[3].toString()
 				}
 				challengeList.push(toAdd);
 				console.log("Submitting challenge entry for user : " + message.author.username + " - " + args[2].toString());
@@ -546,7 +546,7 @@ async function userCommands(message, args) {
 			else { 
 				let toAdd = {
 					"userID": hashCode(message.author.toString()),
-					"vote": args[2].toString(),
+					"vote": args[2].toString()
 				}
 				voteList.push(toAdd);
 				fs.writeFileSync("./info/votes.json", JSON.stringify(voteList, null, "\t"), "utf8");
