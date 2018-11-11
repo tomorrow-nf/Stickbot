@@ -506,7 +506,7 @@ async function userCommands(message, args) {
 			else { 
 				let toAdd = {
 					"user": message.author.username,
-					"ID": message.author,
+					"ID": message.author.toString(),
 					"entry": args[2],
 					"descr": args[3]
 				}
