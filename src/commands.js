@@ -476,7 +476,7 @@ async function userCommands(message, args) {
 											 "\n Voting deadline: `" + voteEnd.toLocaleString() + " EDT`");
 		} 
 		else if (args[1] == "submit"){
-			if (message.channel.type != dm){
+			if (message.channel.type != "dm"){
 				await message.delete();
 			}
 			if (args.length < 4) {
@@ -517,7 +517,7 @@ async function userCommands(message, args) {
 			}
 		}
 		else if (args[1] == "vote") {
-			if (message.channel.type != dm){
+			if (message.channel.type != "dm"){
 				await message.delete();
 			}
 			if (args.length != 3) {
