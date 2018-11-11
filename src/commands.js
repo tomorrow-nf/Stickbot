@@ -506,9 +506,9 @@ async function userCommands(message, args) {
 			else { 
 				let toAdd = {
 					"user": message.author.username,
-					"ID": message.author.toString(),
-					"entry": args[2].toString(),
-					"descr": args[3].toString()
+					"ID": message.author,
+					"entry": args[2],
+					"descr": args[3]
 				}
 				challengeList.push(toAdd);
 				console.log("Submitting challenge entry for user : " + message.author.username);
