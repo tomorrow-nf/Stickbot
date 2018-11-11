@@ -476,6 +476,7 @@ async function userCommands(message, args) {
 											 "\n Voting deadline: `" + voteEnd.toLocaleString() + " EDT`");
 		} 
 		else if (args[1] == "submit"){
+			await message.delete();
 			if (args.length < 4) {
 				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
 			} 
@@ -514,6 +515,7 @@ async function userCommands(message, args) {
 			}
 		}
 		else if (args[1] == "vote") {
+			await message.delete();
 			if (args.length != 3) {
 				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
 			} 
