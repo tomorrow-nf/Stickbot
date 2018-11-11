@@ -49,7 +49,7 @@ const DiscordBot = new Discord.Client({
 DiscordBot.on('message', async message => {
 	if (message.author.bot) return;
 	
-	let args = message.content.toLowerCase().split(" ");
+	let args = message.content.split(" ");
 
 	//Mod specific handlers:
 	if (misc.memberIsMod(message)) {
