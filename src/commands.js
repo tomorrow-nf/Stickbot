@@ -471,7 +471,7 @@ async function userCommands(message, args) {
 																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
 																		   "\n`!challenge help`: Display this message\n" +
-											 "\n Challenge submissions open: `" + submissionStart.toLocaleString('en-US') + " EDT`" +
+											 "\n Challenge submissions open: `" + submissionStart.toString() + " EDT`" +
 											 "\n Submission deadline: `" + submissionDeadline.toLocaleString('en-US') + " EDT`" +
 											 "\n Voting begins: `" + voteStart.toLocaleString('en-US') + " EDT`" +
 											 "\n Voting deadline: `" + voteEnd.toLocaleString('en-US') + " EDT`");
@@ -481,7 +481,7 @@ async function userCommands(message, args) {
 				await message.delete();
 			}
 			if (args.length < 4) {
-				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`");
+				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`, where 'LINK-TO-ENTRY' is an imgur/google drive/etc link, and 'DESCRIPTION' is a title or writeup on your entry.");
 			} 
 			if (currentDate < submissionStart){
 				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart.toLocaleString() + " EDT");
