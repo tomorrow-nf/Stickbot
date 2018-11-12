@@ -474,7 +474,8 @@ async function userCommands(message, args) {
 											 "\n Challenge submissions open: `" + submissionStart.toLocaleString('en-US', { timeZone: "America/Montserrat" }) + " EDT`" +
 											 "\n Submission deadline: `" + submissionDeadline.toLocaleString('en-US', { timeZone: "America/Montserrat" }) + " EDT`" +
 											 "\n Voting begins: `" + voteStart.toLocaleString('en-US', { timeZone: "America/Montserrat" }) + " EDT`" +
-											 "\n Voting deadline: `" + voteEnd.toLocaleString('en-US', { timeZone: "America/Montserrat" }) + " EDT`");
+											 "\n Voting deadline: `" + voteEnd.toLocaleString('en-US', { timeZone: "America/Montserrat" }) + " EDT`" + 
+											 "\n For reference, the current time is: " + currentDate.toLocaleString('en-US', { timeZone: "America/Montserrat" }));
 		} 
 		else if (args[1] == "submit"){
 			if (message.channel.type != "dm"){
