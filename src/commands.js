@@ -471,7 +471,7 @@ async function userCommands(message, args) {
 																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
 																		   "\n`!challenge help`: Display this message\n" +
-											 "\n Challenge submissions open: `" + submissionStart.toString() + " EDT`" +
+											 "\n Challenge submissions open: `" + submissionStart.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT`" +
 											 "\n Submission deadline: `" + submissionDeadline.toLocaleString('en-US') + " EDT`" +
 											 "\n Voting begins: `" + voteStart.toLocaleString('en-US') + " EDT`" +
 											 "\n Voting deadline: `" + voteEnd.toLocaleString('en-US') + " EDT`");
