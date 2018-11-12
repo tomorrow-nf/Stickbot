@@ -463,7 +463,7 @@ async function userCommands(message, args) {
 		var submissionDeadline = new Date('November 11, 2018 23:59 GMT-05:00');
 		var voteStart = new Date('November 12, 2018 08:00 GMT-05:00');
 		var voteEnd = new Date('November 14, 2018 08:00 GMT-05:00');
-		console.log("Current date: " + currentDate + " Submission start: " + submissionStart + " Deadline: " + submissionDeadline + " Voting start: " + voteStart + " Voting end:" + voteEnd);
+		//console.log("Current date: " + currentDate + " Submission start: " + submissionStart + " Deadline: " + submissionDeadline + " Voting start: " + voteStart + " Voting end:" + voteEnd);
 
 		if (args[1] == "help" || args.length < 2 ||
 			(args[1] != "submit" && args[1] != "vote" && args[1] != "view")) {
@@ -519,6 +519,7 @@ async function userCommands(message, args) {
 			}
 		}
 		else if (args[1] == "vote") {
+			//TODO: Need a safety check for vote tampering (using member join_at)
 			if (message.channel.type != "dm"){
 				await message.delete();
 			}
@@ -530,9 +531,6 @@ async function userCommands(message, args) {
 			}
 			if (currentDate > voteEnd){
 				return await message.channel.send("Challenge voting has closed, sorry! Check back for the next challenge");
-			}
-			if (new Date(message.member.joined_at) > voteStart){
-				return await message.channel.send("Sorry, to prevent tampering, only previously active server members are eligible to vote in this challenge.");
 			}
 			// First check if this user has voted already. Hash user IDs to help prevent tampering.
 			// Add 1 to the vote, we don't want to start at 0
