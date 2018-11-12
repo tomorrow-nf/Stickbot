@@ -471,10 +471,10 @@ async function userCommands(message, args) {
 																		   "\n`!challenge vote ENTRY-NUMBER`: Vote for the provided entry" + 
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
 																		   "\n`!challenge help`: Display this message\n" +
-											 "\n Challenge submissions open: `" + submissionStart.toLocaleString("en_us") + " EDT`" +
-											 "\n Submission deadline: `" + submissionDeadline.toLocaleString("en_us") + " EDT`" +
-											 "\n Voting begins: `" + voteStart.toLocaleString("en_us") + " EDT`" +
-											 "\n Voting deadline: `" + voteEnd.toLocaleString("en_us") + " EDT`");
+											 "\n Challenge submissions open: `" + submissionStart.toLocaleString("en_US") + " EDT`" +
+											 "\n Submission deadline: `" + submissionDeadline.toLocaleString("en_US") + " EDT`" +
+											 "\n Voting begins: `" + voteStart.toLocaleString("en_US") + " EDT`" +
+											 "\n Voting deadline: `" + voteEnd.toLocaleString("en_US") + " EDT`");
 		} 
 		else if (args[1] == "submit"){
 			if (message.channel.type != "dm"){
