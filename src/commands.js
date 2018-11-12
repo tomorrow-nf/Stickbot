@@ -463,6 +463,7 @@ async function userCommands(message, args) {
 		var submissionDeadline = new Date('November 11, 2018 19:59 GMT-04:00');
 		var voteStart = new Date('November 12, 2018 04:00 GMT-04:00');
 		var voteEnd = new Date('November 14, 2018 04:00 GMT-04:00');
+		console.log("Current date: " + currentDate + " Submission start: " + submissionStart + " Deadline: " + submissionDeadline + " Voting start: " + voteStart + " Voting end:" + voteEnd);
 
 		if (args[1] == "help" || args.length < 2 ||
 			(args[1] != "submit" && args[1] != "vote" && args[1] != "view")) {
@@ -486,7 +487,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart.toLocaleString() + " EDT");
 			}
 			if (currentDate > submissionDeadline){
-				return await message.channel.send("Challenge submissions are have closed, sorry!");
+				return await message.channel.send("Challenge submissions are now closed, sorry!");
 			}
 			
 			//first check if this user has an entry already
