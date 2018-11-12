@@ -472,9 +472,9 @@ async function userCommands(message, args) {
 																		   "\n`!challenge view`: View all submissions (must have DMs enabled on this server)" +
 																		   "\n`!challenge help`: Display this message\n" +
 											 "\n Challenge submissions open: `" + submissionStart.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT`" +
-											 "\n Submission deadline: `" + submissionDeadline.toLocaleString('en-US') + " EDT`" +
-											 "\n Voting begins: `" + voteStart.toLocaleString('en-US') + " EDT`" +
-											 "\n Voting deadline: `" + voteEnd.toLocaleString('en-US') + " EDT`");
+											 "\n Submission deadline: `" + submissionDeadline.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT`" +
+											 "\n Voting begins: `" + voteStart.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT`" +
+											 "\n Voting deadline: `" + voteEnd.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT`");
 		} 
 		else if (args[1] == "submit"){
 			if (message.channel.type != "dm"){
@@ -484,7 +484,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("USAGE: `!challenge submit LINK-TO-ENTRY DESCRIPTION`, where 'LINK-TO-ENTRY' is an imgur/google drive/etc link, and 'DESCRIPTION' is a title or writeup on your entry.");
 			} 
 			if (currentDate < submissionStart){
-				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart.toLocaleString() + " EDT");
+				return await message.channel.send("Challenge submissions are not yet open. Submit your entry after: " + submissionStart.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT");
 			}
 			if (currentDate > submissionDeadline){
 				return await message.channel.send("Challenge submissions are now closed, sorry!");
@@ -525,7 +525,7 @@ async function userCommands(message, args) {
 				return await message.channel.send("USAGE: `!challenge vote ENTRY-NUMBER`");
 			} 
 			if (currentDate < voteStart){
-				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart.toLocaleString() + " EDT");
+				return await message.channel.send("Challenge voting is not yet open. Voting will open on: " + voteStart.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT");
 			}
 			if (currentDate > voteEnd){
 				return await message.channel.send("Challenge voting has closed, sorry! Check back for the next challenge");
