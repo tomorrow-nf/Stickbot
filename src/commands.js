@@ -474,7 +474,7 @@ async function userCommands(message, args) {
 											 "\n Challenge submissions open: `" + submissionStart +
 											 "\n Submission deadline: `" + submissionDeadline +
 											 "\n Voting begins: `" + voteStart +
-											 "\n Voting deadline: `" + voteEnd;
+											 "\n Voting deadline: `" + voteEnd);
 		} 
 		else if (args[1] == "submit"){
 			if (message.channel.type != "dm"){
