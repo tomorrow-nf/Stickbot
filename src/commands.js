@@ -459,10 +459,10 @@ async function userCommands(message, args) {
 	else if (args[0] == "!challenge") {
 		// TODO: Mod command to provide and set these dates
 		var currentDate = new Date();
-		var submissionStart = new Date('November 10, 2018 08:00 GMT-04:00');
-		var submissionDeadline = new Date('November 11, 2018 23:59 GMT-04:00');
-		var voteStart = new Date('November 12, 2018 08:00 GMT-04:00');
-		var voteEnd = new Date('November 14, 2018 08:00 GMT-04:00');
+		var submissionStart = new Date('November 10, 2018 08:00 GMT-05:00');
+		var submissionDeadline = new Date('November 11, 2018 23:59 GMT-05:00');
+		var voteStart = new Date('November 12, 2018 08:00 GMT-05:00');
+		var voteEnd = new Date('November 14, 2018 08:00 GMT-05:00');
 		console.log("Current date: " + currentDate + " Submission start: " + submissionStart + " Deadline: " + submissionDeadline + " Voting start: " + voteStart + " Voting end:" + voteEnd);
 
 		if (args[1] == "help" || args.length < 2 ||
