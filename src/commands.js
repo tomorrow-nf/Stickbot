@@ -565,7 +565,7 @@ async function userCommands(message, args) {
 		}
 		else if (args[1] == "view"){
 			if (currentDate < voteStart){
-				return await message.channel.send("Sorry, challenge entries are not yet available to view. Check back soon!");
+				return await message.channel.send("Sorry, challenge entries are not yet available to view. Check back at: " ` + voteStart.toLocaleString('en-US', { timeZone: "America/New_York" }) + " EDT`");
 			}
 			let allSubmissions = "Here are all the entries to the current CustomGCC Challenge:\n========================\n";
 			for (let i = 0; i < challengeList.length; i++) {
