@@ -1,5 +1,5 @@
 # Stickbot
-The Official Bot for the [CustomGCC Discord Server](https://discord.customg.cc), providing basic quality of life improvements to the server.
+The Official Bot for the [CustomGCC Discord Server](http://discord.customg.cc), providing basic quality of life improvements to the server.
 
 Based off of Gifkin, the Icons: Combat Arena discord bot, and the successor to Zhubot, the previous CGCC bot which died in a tragic lightning strike. 
 
