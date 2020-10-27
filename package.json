@@ -9,7 +9,8 @@
   "author": "Adam Gincel",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.3.2",
+    "@discordjs/opus": "^0.3.3",
+    "discord.js": "^12.4.1",
     "fs": "0.0.1-security",
     "uuid": "^8.3.1"
   }
